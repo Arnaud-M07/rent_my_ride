@@ -6,14 +6,16 @@ require_once __DIR__ . '/../../../config/const.php';
 // CATEGORY INPUT
 $category = filter_input(INPUT_POST,'category', FILTER_SANITIZE_SPECIAL_CHARS);
 if(empty($category)){
-    $error['category'] = 'Veuillez renseigner votre nom.';
+    $error['category'] = 'Veuillez renseigner une catégorie à ajouter.';
 } else {
     $isOk = filter_var($category, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>'/'.CATEGORY.'/')));
     // $isOK = preg_match('/^[A-Za-zéèëêçà]{2,50}(-| )?([A-Za-zéèçà]{2,50})?$/', $_POST['category']);
     if(!$isOk){
-        $error['category'] = 'Le nom n\'est pas valide.';
+        $error['category'] = 'La catégorie renseigné n\'est pas valide.';
     }
 }
+
+
 
 include __DIR__ . '/../../../views/templates/dashboard/header_dashboard.php';
 include __DIR__ . '/../../../views/templates/dashboard/navbar_dashboard.php';
