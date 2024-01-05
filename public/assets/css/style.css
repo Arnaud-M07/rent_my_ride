@@ -1,0 +1,14 @@
+.section-add-category{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-add-category form{
+    border: 1px solid #bcbcbc;
+    border-radius: 10px;
+    padding: 30px 80px;
+    
+}
+

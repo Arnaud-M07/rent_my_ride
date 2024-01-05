@@ -1,4 +1,5 @@
 </main>
+</row>
 <footer></footer>
 
 <!-- BOOTSTRAP -->
