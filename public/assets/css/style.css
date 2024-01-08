@@ -1,5 +1,9 @@
-/* Page ADD CATEGORY */
+a{
+    color: inherit !important;
+    /* text-decoration: none !important; */
+}
 
+/* Page ADD CATEGORY */
 .section-add-category{
     height: 100vh;
     display: flex;
@@ -19,4 +23,26 @@
 }
 .addToBdd-message{
     color: green;
+}
+
+/* Page LIST CATEGORY */
+
+.section-list-category{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-list-category .col-add-cat{
+display: flex;
+justify-content: flex-end;
+align-items: center;
+}
+
+
+.div-table {
+    border: 1px solid #bcbcbc;
+    border-radius: 10px;
+    padding: 30px 80px;
 }

@@ -24,6 +24,9 @@
                 </div>
             </div>
         </form>
+        <a href="/controllers/dashboard/categories/list-ctrl.php">
+            <i class="bi bi-arrow-left-circle"></i> Retour à la liste des catégories
+        </a>
     </div>
 </div>
 
