@@ -5,7 +5,7 @@
             <form action="" method="POST" class="form" novalidate>
                 <div class="row">
                     <div class="col">
-                        <label for="categoryInput" class="form-label">Nom de la catégorie</label>
+                        <label for="categoryInput" class="form-label">Nom de la catégorie :</label>
                         <input pattern="<?=CATEGORY?>" 
                         value="<?= $category ?? '' ?>" 
                         name="category" 
