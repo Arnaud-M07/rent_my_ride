@@ -1,7 +1,16 @@
+body{
+    background-color: #F9F9F9 !important;
+}
+
 a{
     color: inherit !important;
     /* text-decoration: none !important; */
 }
+
+h1{
+    font-weight: bold !important;
+}
+
 
 /* Page ADD CATEGORY */
 .section-add-category{
@@ -9,13 +18,15 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding:0 5vw ;
 }
 
 .section-add-category form{
-    border: 1px solid #bcbcbc;
+    border: 1px solid #f1f1f1;
+    box-shadow: 0px 5px 10px -3px rgba(0,0,0,0.1);
     border-radius: 10px;
     padding: 30px 80px;
-    
+    background-color: #FFF;
 }
 
 .alert-message{
@@ -32,6 +43,7 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding:0 5vw ;
 }
 
 .section-list-category .col-add-cat{
@@ -40,9 +52,10 @@ justify-content: flex-end;
 align-items: center;
 }
 
-
 .div-table {
-    border: 1px solid #bcbcbc;
+    border: 1px solid #f1f1f1;
+    box-shadow: 0px 5px 10px -3px rgba(0,0,0,0.1);
     border-radius: 10px;
     padding: 30px 80px;
+    background-color: #FFF;
 }

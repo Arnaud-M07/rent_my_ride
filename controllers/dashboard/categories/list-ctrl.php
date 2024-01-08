@@ -10,7 +10,7 @@ try{
     // Instanciation de la classe du modèle (remplacez 'NomDeVotreModele' par le nom de votre classe modèle)
     $category = new Category();
     // Appel de la méthode getAll du modèle
-    $results = $category->getAll();
+    $categories = $category->getAll();
 
 }catch(PDOException $e) {
     echo "Erreur : " . $e->getMessage();

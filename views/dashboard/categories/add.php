@@ -1,7 +1,9 @@
 
-<div class="col section-add-category">
+<div class="section-add-category">
     <div class="container">
-        <h1>Ajout catégorie</h1>
+        <div class="row pb-3">
+            <h1>Ajout catégorie</h1>
+        </div>
         <form action="" method="POST" class="form" novalidate>
             <div class="row">
                 <div class="col">
@@ -24,9 +26,12 @@
                 </div>
             </div>
         </form>
-        <a href="/controllers/dashboard/categories/list-ctrl.php">
-            <i class="bi bi-arrow-left-circle"></i> Retour à la liste des catégories
-        </a>
+        <div class="row pt-2">
+            <a href="/controllers/dashboard/categories/list-ctrl.php">
+                <i class="bi bi-arrow-left-circle"></i> Retour à la liste des catégories
+            </a>
+        </div>
+        
     </div>
 </div>
 

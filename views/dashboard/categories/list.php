@@ -1,6 +1,6 @@
 <div class="section-list-category">
     <div class="container">
-        <div class="row">
+        <div class="row pb-3">
             <div class="col-6">
                 <h1>Liste des catégories</h1>
             </div>
@@ -23,32 +23,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Catégorie 1</td>
-                        <td><button class="btn btn-dark btn-modify"><i class="bi bi-pencil-square"></i></button></td>
-                        <td><button class="btn btn-dark btn-delete"><i class="bi bi-trash"></i></i></button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Catégorie 2</td>
-                        <td><button class="btn btn-dark btn-modify"><i class="bi bi-pencil-square"></i></button></td>
-                        <td><button class="btn btn-dark btn-delete"><i class="bi bi-trash"></i></i></button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Catégorie 3</td>
-                        <td><button class="btn btn-dark btn-modify"><i class="bi bi-pencil-square"></i></button></td>
-                        <td><button class="btn btn-dark btn-delete"><i class="bi bi-trash"></i></i></button></td>
-                    </tr>
+                    <?php
+                    foreach ($categories as $category) {
+                        echo "<tr>
+                                <th scope='row'>{$category['id_category']}</th>
+                                <td>{$category['name']}</td>
+                                <td>
+                                    <button class='btn btn-dark btn-modify'>
+                                        <i class='bi bi-pencil-square'></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class='btn btn-dark btn-delete'>
+                                        <i class='bi bi-trash'></i>
+                                    </button>
+                                </td>
+                            </tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
-    <?php 
-        foreach($results as $result){
-            echo $result['name'];
-            // var_dump($result['name']);
-        }
-    ?>
     </div>
 </div>
