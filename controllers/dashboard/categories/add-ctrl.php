@@ -10,6 +10,7 @@ $password = "F#N7Lc&5dd53yXsz"; // F#N7Lc&5dd53yXsz
 if($_SERVER['REQUEST_METHOD'] =='POST'){
     // Tableau d'erreurs
     $error = [];
+    $adToBdd = [];
     // CATEGORY INPUT
     $category = filter_input(INPUT_POST,'category', FILTER_SANITIZE_SPECIAL_CHARS);
     if(empty($category)){
@@ -18,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] =='POST'){
         $isOk = filter_var($category, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>'/'.CATEGORY.'/')));
         if(!$isOk){
             $error['category'] = 'La catégorie renseigné n\'est pas valide.';
-        } else{
+        } else {
             // BDD
             try {
                 // Connexion BDD
@@ -35,7 +36,8 @@ if($_SERVER['REQUEST_METHOD'] =='POST'){
                 VALUES('$category')";
         
                 $dbco->exec($sql);
-                echo 'Entrée ajoutée dans la table';
+                $addToBdd['category'] = 'Entrée ajoutée dans la table';
+                // echo 'Entrée ajoutée dans la table';
 
             } catch (PDOException $e) {
                 echo "Erreur : " . $e->getMessage();

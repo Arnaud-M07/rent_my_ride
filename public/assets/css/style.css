@@ -14,3 +14,9 @@
     
 }
 
+.alert-message{
+    color: red;
+}
+.addToBdd-message{
+    color: green;
+}
