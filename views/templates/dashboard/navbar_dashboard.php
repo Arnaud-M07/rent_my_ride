@@ -11,27 +11,27 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">
+                    <a href="../../../controllers/dashboard/categories/add-ctrl.php" class="nav-link active">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#home"></use>
                         </svg>
-                        Home
+                        Catégories
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="../../../controllers/dashboard/categories/list-ctrl.php" class="nav-link">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#speedometer2"></use>
                         </svg>
-                        Dashboard
+                        Véhicules
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="#" class="nav-link <?= $activePage ?? '' ?>">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#table"></use>
                         </svg>
-                        Orders
+                        Réservations
                     </a>
                 </li>
             </ul>

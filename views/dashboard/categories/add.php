@@ -5,17 +5,17 @@
         <form action="" method="POST" class="form" novalidate>
             <div class="row">
                 <div class="col">
-                    <label for="categoryInput" class="form-label">Nom de la catégorie :</label>
-                    <input pattern="<?=CATEGORY?>" 
-                    value="<?= $category ?? '' ?>" 
-                    name="category" 
+                    <label for="categoryName" class="form-label">Nom de la catégorie :</label>
+                    <input pattern="<?=REGEX_CATEGORY?>" 
+                    value="<?= $categoryName ?? '' ?>" 
+                    name="categoryName" 
                     type="text" 
                     class="form-control" 
                     placeholder=""
-                    id="categoryInput" 
+                    id="categoryName" 
                     required>
-                    <small class="alert-message"><?= $error['category'] ?? '' ?></small>
-                    <small class="addToBdd-message"><?= $addToBdd['category'] ?? '' ?></small>
+                    <small class="alert-message"><?= $error['categoryName'] ?? '' ?></small>
+                    <small class="addToBdd-message"><?= $addedToDB['categoryName'] ?? '' ?></small>
                 </div>
             </div>
             <div class="row">
