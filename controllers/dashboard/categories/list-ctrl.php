@@ -7,10 +7,7 @@ require_once __DIR__ . '/../../../models/Category.php';
 
 try{
     $title = 'Liste des catégories';
-    // Instanciation de la classe du modèle (remplacez 'NomDeVotreModele' par le nom de votre classe modèle)
-    $category = new Category();
-    // Appel de la méthode getAll du modèle
-    $categories = $category->getAll();
+    $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
 
 }catch(PDOException $e) {
     echo "Erreur : " . $e->getMessage();

@@ -2,7 +2,7 @@
 <div class="section-add-category">
     <div class="container">
         <div class="row pb-3">
-            <h1>Ajouter une catégorie</h1>
+            <h1>Modifier une catégorie</h1>
         </div>
         <form action="" method="POST" class="form" novalidate>
             <div class="row">
@@ -13,7 +13,7 @@
                     name="categoryName" 
                     type="text" 
                     class="form-control" 
-                    placeholder=""
+                    placeholder=<?= $categoryName ?>
                     id="categoryName" 
                     required>
                     <small class="alert-message"><?= $error['categoryName'] ?? '' ?></small>
@@ -22,7 +22,7 @@
             </div>
             <div class="row">
                 <div class="col-12 col-xl-6 col-form-button">
-                    <button type="submit" class="btn btn-dark mt-3">Ajouter</button>
+                    <button type="submit" class="btn btn-dark mt-3">Modifier</button>
                 </div>
             </div>
         </form>
@@ -33,7 +33,3 @@
         </div>
     </div>
 </div>
-
-
-
-
