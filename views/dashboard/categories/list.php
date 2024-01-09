@@ -6,7 +6,7 @@
             </div>
             <div class="col-6 col-add-cat">
                 <button class="btn btn-dark">
-                    <a href="/controllers/dashboard/categories/update-ctrl.php">
+                    <a href="/controllers/dashboard/categories/add-ctrl.php">
                         <i class="bi bi-plus-circle"></i> Ajouter une catégorie
                     </a>
                 </button>

@@ -59,37 +59,18 @@ class Category{
     }
 
     // UPDATE
-    // public function update(){
-    //     // Connexion BDD
-    //     $pdo = new PDO(DSN, USER, PASSWORD);
-    //     // On définit le mode d'erreur de PDO sur Exception
-    //     // $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //     // Requête SQL de sélection dans la table 'categories'
-    //     $sql = "UPDATE `categories`
-    //             SET `name`='$category['name']'
-    //             WHERE `id_category`=`$category['id_category']`";
-    //     $sth = $pdo->prepare($sql);
-    //     $sth->execute();
+    public function update(){
+        // Connexion BDD
+        $pdo = Database::connect();
+        // Requête SQL de sélection dans la table 'categories'
+        $sql = "UPDATE `categories`
+            SET `name` = :categoryName;
+            WHERE `id_category` = :categoryId";
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':categoryName', $this->getName());
+        $sth->bindValue(':categoryId', $this->getIdCategory());
+        $sth->execute();
         
-    // }
+    }
 
 }
-
-
-
-// $berline = new Category(null, 'berline');
-// $berline->setName('berline')
-
-
-        $pdo = new PDO(DSN, USER, PASSWORD);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // Requête SQL de sélection dans la table 'categories'
-        $sql = 'SELECT `id_category`, name FROM `categories`';
-        // Préparation de la requête
-        $sth = $pdo->prepare($sql);
-        // // Exécution de la requête
-        $sth->execute();
-        // // Récupération des résultats
-        $result = $sth->fetchAll();
-        // // Retourne le tableau de catégories
-        return $result;
