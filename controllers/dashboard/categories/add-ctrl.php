@@ -8,7 +8,7 @@ try {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Tableau d'erreurs
         $error = [];
-        $adToBdd = [];
+        $adToDB = [];
         // CATEGORY INPUT
         // categoryName
         $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_SPECIAL_CHARS);

@@ -1,4 +1,3 @@
-
 <div class="section-add-category">
     <div class="container">
         <div class="row pb-3">
@@ -13,7 +12,7 @@
                     name="categoryName" 
                     type="text" 
                     class="form-control" 
-                    placeholder=<?= $categoryName ?>
+                    placeholder="<?= $category->name ?>"
                     id="categoryName" 
                     required>
                     <small class="alert-message"><?= $error['categoryName'] ?? '' ?></small>

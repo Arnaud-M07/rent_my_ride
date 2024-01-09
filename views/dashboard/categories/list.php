@@ -30,7 +30,7 @@
                             <td><?= $category->name ?></td>
                             <td>
                                 <button class='btn btn-dark btn-modify'>
-                                    <a href='update-ctrl.php'><i class='bi bi-pencil-square'></i></a>
+                                    <a href='/controllers/dashboard/categories/update-ctrl.php?id=<?= $category->id_category ?>'><i class='bi bi-pencil-square'></i></a>
                                 </button>
                             </td>
                             <td>
@@ -46,3 +46,5 @@
         </div>
     </div>
 </div>
+
+

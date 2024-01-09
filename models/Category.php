@@ -47,7 +47,7 @@ class Category{
     }
 
     // GETALL
-    public static function getAll():array{
+    public static function getAll(): array {
         // Connexion BDD et récupération 
         $pdo = Database::connect();
         $sql = 'SELECT *
@@ -58,19 +58,37 @@ class Category{
         return $result;
     }
 
-    // UPDATE
-    public function update(){
-        // Connexion BDD
+    // GET
+    // Récupérer l'id depuis l'URL
+    public static function get(int $id): object | false {
         $pdo = Database::connect();
-        // Requête SQL de sélection dans la table 'categories'
-        $sql = "UPDATE `categories`
-            SET `name` = :categoryName;
-            WHERE `id_category` = :categoryId";
+        $sql = 'SELECT *
+                FROM `categories`
+                WHERE `id_category` = :id_category';
         $sth = $pdo->prepare($sql);
-        $sth->bindValue(':categoryName', $this->getName());
-        $sth->bindValue(':categoryId', $this->getIdCategory());
+        $sth->bindValue(':id_category', $id, PDO::PARAM_INT);
+
         $sth->execute();
+
+        $result = $sth->fetch(PDO::FETCH_OBJ);
         
+        return $result;
     }
+
+    // UPDATE
+    // public function update(){
+    //     // Connexion BDD
+    //     $pdo = Database::connect();
+    //     // Requête SQL de sélection dans la table 'categories'
+    //     $sql = "UPDATE `categories`
+    //         SET `name` = :categoryName
+    //         WHERE `id_category` = :categoryId";
+    //     $sth = $pdo->prepare($sql);
+    //     $sth->bindValue(':categoryName', $this->getName());
+    //     $sth->bindValue(':categoryId', $this->getIdCategory());
+    //     $result = $sth->execute();
+        
+    //     return $result;
+    // }
 
 }

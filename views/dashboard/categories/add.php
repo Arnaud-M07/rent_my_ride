@@ -13,7 +13,7 @@
                     name="categoryName" 
                     type="text" 
                     class="form-control" 
-                    placeholder=""
+                    placeholder="Entrez le nom d'une nouvelle catégorie "
                     id="categoryName" 
                     required>
                     <small class="alert-message"><?= $error['categoryName'] ?? '' ?></small>
