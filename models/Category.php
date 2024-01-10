@@ -76,19 +76,19 @@ class Category{
     }
 
     // UPDATE
-    // public function update(){
-    //     // Connexion BDD
-    //     $pdo = Database::connect();
-    //     // Requête SQL de sélection dans la table 'categories'
-    //     $sql = "UPDATE `categories`
-    //         SET `name` = :categoryName
-    //         WHERE `id_category` = :categoryId";
-    //     $sth = $pdo->prepare($sql);
-    //     $sth->bindValue(':categoryName', $this->getName());
-    //     $sth->bindValue(':categoryId', $this->getIdCategory());
-    //     $result = $sth->execute();
+    public function update(int $id_category){
+        // Connexion BDD
+        $pdo = Database::connect();
+        // Requête SQL de sélection dans la table 'categories'
+        $sql = "UPDATE `categories`
+            SET `name` = :categoryName
+            WHERE `id_category` = :id_category";
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':categoryName', $this->getName());
+        $sth->bindValue(':id_category', $id_category);
+        $result = $sth->execute();
         
-    //     return $result;
-    // }
+        return $result;
+    }
 
 }

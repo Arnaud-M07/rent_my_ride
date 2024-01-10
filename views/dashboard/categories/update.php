@@ -6,7 +6,7 @@
         <form action="" method="POST" class="form" novalidate>
             <div class="row">
                 <div class="col">
-                    <label for="categoryName" class="form-label">Nom de la catégorie :</label>
+                    <label for="categoryName" class="form-label">Nouveau nom de la catégorie :</label>
                     <input pattern="<?=REGEX_CATEGORY?>" 
                     value="<?= $categoryName ?? '' ?>" 
                     name="categoryName" 

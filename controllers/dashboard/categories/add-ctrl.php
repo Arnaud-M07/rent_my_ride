@@ -8,7 +8,7 @@ try {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Tableau d'erreurs
         $error = [];
-        $adToDB = [];
+        $addedToDb = [];
         // CATEGORY INPUT
         // categoryName
         $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -25,7 +25,7 @@ try {
                 $result = $category->insert();
                 // Messages
                 if($result){
-                    $addedToDB['categoryName'] = "Entrée insérée dans la table 'categories'";
+                    $addedToDb['categoryName'] = "Entrée insérée dans la table 'categories'";
                 } else {
                     $error['categoryName'] = 'Erreur de serveur : la donnée n\'a pas été insérée';
                 }

@@ -17,7 +17,7 @@
                     id="categoryName" 
                     required>
                     <small class="alert-message"><?= $error['categoryName'] ?? '' ?></small>
-                    <small class="addToBdd-message"><?= $addedToDB['categoryName'] ?? '' ?></small>
+                    <small class="addToBdd-message"><?= $addedToDb['categoryName'] ?? '' ?></small>
                 </div>
             </div>
             <div class="row">
