@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../../models/Category.php';
 try{
     $title = 'Modifier une catégorie';
 
-    $id_category = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)); // intval : transform l donnée en entier (sécurité)
+    $id_category = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)); // intval : transform la donnée en entier (sécurité)
     $category = Category::get($id_category);
     if(!$category){
         header('Location: /controllers/dashboard/categories/list-ctrl.php');
@@ -20,6 +20,7 @@ try{
         // Tableau d'erreurs
         $error = [];
         $addToDB = [];
+
         // CATEGORY INPUT
         // categoryName
         $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -30,9 +31,9 @@ try{
             if (!$isOk) {
                 $error['categoryName'] = 'La catégorie renseigné n\'est pas valide.';
             }
+
             // Envoi en BDD
             if (empty($error)) {
-
                 $category = new Category($categoryName, $id_category);
                 $result = $category->update();
                 

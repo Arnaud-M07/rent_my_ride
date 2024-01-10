@@ -20,7 +20,7 @@ class Category{
         $this->name = $name;
     }
     public function getName(): string{
-        return $this->name;
+        return $this->name; 
     }
 
     // $idCategory
@@ -76,7 +76,7 @@ class Category{
     }
 
     // UPDATE
-    // Modifie le nom de la catégorie delon l'ID passé en URL
+    // Modifier le nom de la catégorie selon l'ID passé en URL
     public function update(){
         // Connexion BDD
         $pdo = Database::connect();
@@ -94,17 +94,26 @@ class Category{
 
     // DELETE
     // Supprimer une entrée dan sune table
-    // public function delete(){
-    //     $pdo = Database::connect();
+    public static function delete(int $id){
+        $pdo = Database::connect();
 
-    //     $sql = "DELETE FROM `categories`
-    //             WHERE `id_category` = :id_category";
+        $sql = "DELETE FROM `categories`
+                WHERE `id_category` = :id_category";
 
-    //     $sth = $pdo->prepare($sql);
-    //     $sth->bindValue(':id_category', $this->getIdCategory());
-    //     $result = $sth->execute();
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_category', $id, PDO::PARAM_INT);
+        
+        $result = $sth->execute();
 
-    //     return $result;
-    // }
+        return $result;
+    }
 
+    public static function isExist(){
+        $pdo = Database::connect();
+        
+        $sql = 'SELECT *
+                FROM `categories`
+                WHERE `id_category` = :id_category';
+        
+    }       
 }
