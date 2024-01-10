@@ -59,7 +59,7 @@ class Category{
     }
 
     // GET
-    // Récupérer l'id depuis l'URL
+    // Récupère toutes les colonnes de la table 'categories' en fonction de l'id de la catégorie
     public static function get(int $id): object | false {
         $pdo = Database::connect();
         $sql = 'SELECT *
@@ -70,12 +70,13 @@ class Category{
 
         $sth->execute();
 
-        $result = $sth->fetch(PDO::FETCH_OBJ);
+        $result = $sth->fetch(PDO::FETCH_OBJ); // Va chercher le résultat de la requête et le retourne sous forme d'objet
         
         return $result;
     }
 
     // UPDATE
+    // Modifie le nom de la catégorie delon l'ID passé en URL
     public function update(int $id_category){
         // Connexion BDD
         $pdo = Database::connect();
@@ -85,7 +86,7 @@ class Category{
             WHERE `id_category` = :id_category";
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':categoryName', $this->getName());
-        $sth->bindValue(':id_category', $id_category);
+        $sth->bindValue(':id_category', $id_category); // Récupération de l'id passé en URL
         $result = $sth->execute();
         
         return $result;

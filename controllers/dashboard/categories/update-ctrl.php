@@ -35,15 +35,13 @@ try{
                 $result = $category->update($id_category);
                 // Messages
                 if($result){
-                    $addedToDB['categoryName'] = "Entrée insérée dans la table 'categories'";
+                    $addedToDB['categoryName'] = "Entrée modifiée dans la table 'categories'";
                 } else {
                     $error['categoryName'] = 'Erreur de serveur : la donnée n\'a pas été insérée';
                 }
             }
         }
     }
-
-
 }catch(PDOException $e) {
     echo "Erreur : " . $e->getMessage();
 }

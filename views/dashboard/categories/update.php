@@ -8,13 +8,13 @@
                 <div class="col">
                     <label for="categoryName" class="form-label">Nouveau nom de la catégorie :</label>
                     <input pattern="<?=REGEX_CATEGORY?>" 
-                    value="<?= $categoryName ?? '' ?>" 
+                    value="<?= $category->name ?? '' ?>" 
                     name="categoryName" 
                     type="text" 
                     class="form-control" 
-                    placeholder="<?= $category->name ?>"
+                    placeholder="<?= $category->name ?? $categoryName ?>"
                     id="categoryName" 
-                    required>
+                    required >
                     <small class="alert-message"><?= $error['categoryName'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDB['categoryName'] ?? '' ?></small>
                 </div>
