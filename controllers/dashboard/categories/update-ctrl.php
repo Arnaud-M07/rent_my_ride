@@ -1,9 +1,10 @@
 <?php
 require_once __DIR__ . '/../../../config/const.php';
 require_once __DIR__ . '/../../../models/Category.php';
-$title = 'Modifier une catégorie';
+
 
 try{
+    $title = 'Modifier une catégorie';
 
     $id_category = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)); // intval : transform l donnée en entier (sécurité)
     $category = Category::get($id_category);
@@ -31,8 +32,10 @@ try{
             }
             // Envoi en BDD
             if (empty($error)) {
-                $category = new Category($categoryName);
-                $result = $category->update($id_category);
+
+                $category = new Category($categoryName, $id_category);
+                $result = $category->update();
+                
                 // Messages
                 if($result){
                     $addedToDB['categoryName'] = "Entrée modifiée dans la table 'categories'";
@@ -41,6 +44,7 @@ try{
                 }
             }
         }
+        $category = Category::get($id_category);
     }
 }catch(PDOException $e) {
     echo "Erreur : " . $e->getMessage();

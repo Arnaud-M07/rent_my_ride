@@ -70,14 +70,14 @@ class Category{
 
         $sth->execute();
 
-        $result = $sth->fetch(PDO::FETCH_OBJ); // Va chercher le résultat de la requête et le retourne sous forme d'objet
+        $result = $sth->fetch(PDO::FETCH_OBJ); // Va chercher la table et la retourne sous forme d'objet
         
         return $result;
     }
 
     // UPDATE
     // Modifie le nom de la catégorie delon l'ID passé en URL
-    public function update(int $id_category){
+    public function update(){
         // Connexion BDD
         $pdo = Database::connect();
         // Requête SQL de sélection dans la table 'categories'
@@ -86,10 +86,25 @@ class Category{
             WHERE `id_category` = :id_category";
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':categoryName', $this->getName());
-        $sth->bindValue(':id_category', $id_category); // Récupération de l'id passé en URL
+        $sth->bindValue(':id_category', $this->getIdCategory(), PDO::PARAM_INT); // Récupération de l'id passé en URL
         $result = $sth->execute();
         
         return $result;
     }
+
+    // DELETE
+    // Supprimer une entrée dan sune table
+    // public function delete(){
+    //     $pdo = Database::connect();
+
+    //     $sql = "DELETE FROM `categories`
+    //             WHERE `id_category` = :id_category";
+
+    //     $sth = $pdo->prepare($sql);
+    //     $sth->bindValue(':id_category', $this->getIdCategory());
+    //     $result = $sth->execute();
+
+    //     return $result;
+    // }
 
 }

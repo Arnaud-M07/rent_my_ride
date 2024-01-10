@@ -1,7 +1,12 @@
 <div class="section-add-category">
     <div class="container">
-        <div class="row pb-3">
+        <div class="row pb-4">
             <h1>Ajouter une catégorie</h1>
+        </div>
+        <div class="row pb-3">
+            <a href="/controllers/dashboard/categories/list-ctrl.php">
+                <i class="bi bi-arrow-left-circle"></i> Retour à la liste des catégories
+            </a>
         </div>
         <form action="" method="POST" class="form" novalidate>
             <div class="row">
@@ -25,11 +30,6 @@
                 </div>
             </div>
         </form>
-        <div class="row pt-2">
-            <a href="/controllers/dashboard/categories/list-ctrl.php">
-                <i class="bi bi-arrow-left-circle"></i> Retour à la liste des catégories
-            </a>
-        </div>
     </div>
 </div>
 
