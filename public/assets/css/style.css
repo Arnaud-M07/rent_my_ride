@@ -2,9 +2,16 @@ body{
     background-color: #F9F9F9 !important;
 }
 
-a{
-    /* color: inherit !important; */
-    /* text-decoration: none !important; */
+header {
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+}
+
+main {
+    margin-left: 25%; /* Ajustez la largeur de la colonne de gauche en fonction de vos besoins */
+    height: 100%;
+    overflow-y: auto;
 }
 
 h1{
@@ -12,8 +19,9 @@ h1{
 }
 
 
-/* Page ADD CATEGORY */
-.section-add-category{
+/* Page ADD CATEGORY - ADD VEHICLE */
+.section-add-category,
+.section-add-vehicle{
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -21,12 +29,26 @@ h1{
     padding:0 5vw ;
 }
 
-.section-add-category form{
+.section-add-category form,
+.section-add-vehicle form{
     border: 1px solid #f1f1f1;
     box-shadow: 0px 5px 10px -3px rgba(0,0,0,0.1);
     border-radius: 10px;
     padding: 30px 80px;
     background-color: #FFF;
+}
+
+.section-add-category form label,
+.section-add-vehicle form label{
+    font-weight: bold;
+
+}
+
+.section-add-vehicle form .row{
+    margin-bottom: 30px;
+}
+.section-add-vehicle form .row:last-child{
+    margin-top: -30px;
 }
 
 .alert-message{

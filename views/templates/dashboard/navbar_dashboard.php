@@ -1,7 +1,7 @@
-<div class="row vh-100 g-0">
+<div class="row g-0">
     <!-- row contenant les cols princicipales : navbar laterale + main -->
     <header class="row col-3">
-        <div class="col-3 header d-flex flex-column flex-shrink-0 p-4 text-white bg-dark" style="width: 100%;">
+        <div class="col-3 header w-100 d-flex flex-column flex-shrink-0 p-4 text-white bg-dark" >
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
@@ -17,7 +17,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="../../../controllers/dashboard/vehicles/list-ctrl.php" class="nav-link text-white">
                         <i class="bi bi-car-front-fill"></i>
                         Véhicules
                     </a>

@@ -2,11 +2,11 @@
     <div class="container">
         <div class="row pb-4">
             <div class="col-6">
-                <h1>Liste des catégories</h1>
+                <h1>Liste des véhicules</h1>
             </div>
             <div class="col-6 col-add-cat">
-                <a class="btn btn-dark" href="/controllers/dashboard/categories/add-ctrl.php">
-                    <i class="bi bi-plus-circle"></i> Ajouter une catégorie
+                <a class="btn btn-dark" href="/controllers/dashboard/vehicles/add-ctrl.php">
+                    <i class="bi bi-plus-circle"></i> Ajouter un véhicule
                 </a>
             </div>
         </div>
@@ -16,7 +16,7 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Nom de la catégorie</th>
+                        <th scope="col">Marque du véhicule</th>
                         <th></th>
                         <th></th>
                     </tr>

@@ -52,9 +52,9 @@ class Category{
         $pdo = Database::connect();
         $sql = 'SELECT *
                 FROM `categories`'; // $sql = 'SELECT `name`, `id_category` FROM `categories`';
+
         $sth = $pdo->query($sql); // Prepare et execute
         $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
-        
         return $result;
     }
 
@@ -65,13 +65,11 @@ class Category{
         $sql = 'SELECT *
                 FROM `categories`
                 WHERE `id_category` = :id_category';
+
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_category', $id, PDO::PARAM_INT);
-
         $sth->execute();
-
         $result = $sth->fetch(PDO::FETCH_OBJ); // Va chercher la table et la retourne sous forme d'objet
-        
         return $result;
     }
 
@@ -84,11 +82,11 @@ class Category{
         $sql = "UPDATE `categories`
             SET `name` = :categoryName
             WHERE `id_category` = :id_category";
+
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':categoryName', $this->getName());
         $sth->bindValue(':id_category', $this->getIdCategory(), PDO::PARAM_INT); // Récupération de l'id passé en URL
         $result = $sth->execute();
-        
         return $result;
     }
 
@@ -96,32 +94,29 @@ class Category{
     // Supprimer une entrée dans une table
     public static function delete(int $id){
         $pdo = Database::connect();
-
+        // Requête SQL
         $sql = "DELETE FROM `categories`
                 WHERE `id_category` = :id_category";
 
-        $sth = $pdo->prepare($sql);
+        $sth = $pdo->prepare($sql); // Prepare est une methode appartenant à la classe PDO, elle attend une chaine de caractère en paramètre d'entrée. Elle retourne un objet de type PDOStatement
         $sth->bindValue(':id_category', $id, PDO::PARAM_INT);
-        
         $result = $sth->execute();
-
         return $result;
     }
 
+    // ISEXIST
+    // Vérifie si une entrée existe déja dans la table
     public static function isExist(string $categoryName): bool{
         $pdo = Database::connect();
-        
+        // Requête SQL
         $sql = 'SELECT *
                 FROM `categories`
                 WHERE `name` = :categoryName';
         
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':categoryName', $categoryName, PDO::PARAM_STR);
-
         $sth->execute();
-
         $result = $sth->rowCount() > 0;
-
         return $result;
         
     }       

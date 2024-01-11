@@ -35,15 +35,22 @@ try{
             // Envoi en BDD
             if (empty($error)) {
                 $category = new Category($categoryName, $id_category);
-                $result = $category->update();
+                // Vérifier si la catégorie existe déjà
+                if(!Category::isExist($categoryName)){
+                    // Si elle n'existe pas, on peut l'insérer
+                    $result = $category->update();
                 
-                // Messages
-                if($result){
-                    $addedToDB['categoryName'] = "Entrée modifiée dans la table 'categories'";
+                    // Messages
+                    if($result){
+                        $addedToDB['categoryName'] = "Entrée modifiée dans la table 'categories'";
+                    } else {
+                        $error['categoryName'] = 'Erreur de serveur : la donnée n\'a pas été insérée';
+                    }
                 } else {
-                    $error['categoryName'] = 'Erreur de serveur : la donnée n\'a pas été insérée';
+                    $error['categoryName'] = 'La catégorie existe déjà.';
                 }
-            }
+                
+            } 
         }
         $category = Category::get($id_category);
     }

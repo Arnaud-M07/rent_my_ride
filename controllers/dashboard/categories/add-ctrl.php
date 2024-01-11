@@ -9,24 +9,22 @@ try {
         // Tableau d'erreurs
         $error = [];
         $addedToDb = [];
-        
         // CATEGORY INPUT
-        // categoryName
         $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_SPECIAL_CHARS);
-        
+        // Nettoyage 
         if (empty($categoryName)) {
             $error['categoryName'] = 'Veuillez renseigner une catégorie à ajouter.';
         } else {
             $isOk = filter_var($categoryName, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
-            
+
             if (!$isOk) {
                 $error['categoryName'] = 'La catégorie renseignée n\'est pas valide.';
             }
-            
+
             // Envoi en BDD
             if (empty($error)) {
                 $category = new Category($categoryName);
-                
+
                 // Vérifier si la catégorie existe déjà
                 if (!Category::isExist($categoryName)) {
                     // Si elle n'existe pas, on peut l'insérer
