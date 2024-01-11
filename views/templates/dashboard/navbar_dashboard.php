@@ -33,4 +33,4 @@
         </div>
     </header>
 
-    <main class="col-9">
+    <main class="col-9 d-flex flex-column h-100">

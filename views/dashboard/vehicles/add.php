@@ -49,16 +49,20 @@
                     <label for="vehicleCategory">Catégorie du véhicule</label>
                     <select class="form-select" name="vehicleCategory" id="vehicleCategory" aria-label="Floating label select example">
                         <option value="" disabled selected hidden><?= 'Séléctionnez une catégorie' ?></option>
-                        
+                        <?php foreach (ARRAY_VEHICLE_CATEGORY as $categories) {
+                            $isSelected = ($category && $actegory == $categories) ? 'selected' : '';
+                            echo "<option value=\"$categories\" $isSelected>$categories</option>";
+                        }
+                        ?>
                     </select>
-                    
+
                     <small class="alert-message"><?= $error['vehicleCategory'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehicleCategory'] ?? '' ?></small>
                 </div>
                 <!-- vehiclePicture -->
                 <div class="col col-md-6">
                     <label for="vehiclePicture" class="form-label mb-0">Photo du véhicule</label>
-                    <input class="form-control form-control" name="vehiclePicture" id="vehiclePicture" type="file" accept=".png, image/jpeg">
+                    <input class="form-control" name="vehiclePicture" id="vehiclePicture" type="file" accept=".png, image/jpeg">
                     <small class="alert-message"><?= $error['vehiclePicture'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehiclePicture'] ?? '' ?></small>
                 </div>
