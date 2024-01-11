@@ -93,7 +93,7 @@ class Category{
     }
 
     // DELETE
-    // Supprimer une entrée dan sune table
+    // Supprimer une entrée dans une table
     public static function delete(int $id){
         $pdo = Database::connect();
 
@@ -108,12 +108,21 @@ class Category{
         return $result;
     }
 
-    public static function isExist(){
+    public static function isExist(string $categoryName): bool{
         $pdo = Database::connect();
         
         $sql = 'SELECT *
                 FROM `categories`
-                WHERE `id_category` = :id_category';
+                WHERE `name` = :categoryName';
+        
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':categoryName', $categoryName, PDO::PARAM_STR);
+
+        $sth->execute();
+
+        $result = $sth->rowCount() > 0;
+
+        return $result;
         
     }       
 }
