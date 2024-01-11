@@ -1,5 +1,8 @@
 <?php
 
+    $title = 'Liste des véhicules';
+    $page = 'vehicles';
+
 
 include __DIR__ . '/../../../views/templates/dashboard/header_dashboard.php';
 include __DIR__ . '/../../../views/templates/dashboard/navbar_dashboard.php';

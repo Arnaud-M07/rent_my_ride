@@ -33,7 +33,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a class='btn btn-dark btn-delete' onclick="return confirm('Voulez-vous vraiment supprimer cet enregistrement ?')" href='/controllers/dashboard/categories/delete-ctrl.php?id=<?= $category->id_category ?>'>
+                                <a class='btn btn-dark btn-delete' onclick=" return confirm(`Voulez-vous vraiment supprimer l'\enregistrement' <?= $category->id_category ?> : <?= $category->name ?>' ?`)" href='/controllers/dashboard/categories/delete-ctrl.php?id=<?= $category->id_category ?>'>
                                     <i class='bi bi-trash'></i>
                                 </a>
                             </td>

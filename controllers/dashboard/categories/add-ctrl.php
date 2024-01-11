@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../../models/Category.php';
 
 try {
     $title = 'Ajout de catégories';
+    $page = 'categories';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Tableau d'erreurs

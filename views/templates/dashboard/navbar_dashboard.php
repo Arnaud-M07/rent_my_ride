@@ -1,7 +1,7 @@
 <div class="row g-0">
     <!-- row contenant les cols princicipales : navbar laterale + main -->
     <header class="row col-3">
-        <div class="col-3 header w-100 d-flex flex-column flex-shrink-0 p-4 text-white bg-dark" >
+        <div class="col-3 header w-100 d-flex flex-column flex-shrink-0 p-4 bg-dark text-white" >
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
@@ -11,13 +11,13 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="../../../controllers/dashboard/categories/list-ctrl.php" class="nav-link active">
+                    <a href="../../../controllers/dashboard/categories/list-ctrl.php" class="nav-link <?php echo ($page == 'categories') ? 'active' : 'text-white'; ?>">
                         <i class="bi bi-tags-fill"></i>
                         Catégories
                     </a>
                 </li>
                 <li>
-                    <a href="../../../controllers/dashboard/vehicles/list-ctrl.php" class="nav-link text-white">
+                    <a href="../../../controllers/dashboard/vehicles/list-ctrl.php" class="nav-link <?php echo ($page == 'vehicles') ? 'active' : 'text-white'; ?>">
                         <i class="bi bi-car-front-fill"></i>
                         Véhicules
                     </a>

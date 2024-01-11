@@ -11,9 +11,9 @@ try {
     $isDeleted = Category::delete($id_category);
 
     if ($isDeleted) {
-        $msg = 'La donnée a été supprimée';
+        $msg = 'La catégorie a été supprimée';
     } else {
-        $msg = 'Erreur, La donnée n\'a pas été supprimée';
+        $msg = 'Erreur, La catégorie n\'a pas été supprimée';
     }
     $_SESSION['msg'] = $msg;
     // Passage de la donnée par l'URL

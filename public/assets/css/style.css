@@ -18,6 +18,12 @@ h1{
     font-weight: bold !important;
 }
 
+/* .nav-link.active{
+    background-color: #ee6b4b!important;
+} */
+
+
+
 
 /* Page ADD CATEGORY - ADD VEHICLE */
 .section-add-category,
@@ -61,7 +67,6 @@ h1{
 /* Page LIST CATEGORY */
 
 .section-list-category{
-    /* height: 100vh; */
     display: flex;
     justify-content: center;
     align-items: center;

@@ -8,6 +8,7 @@ require_once __DIR__ . '/../../../models/Category.php';
 
 try{
     $title = 'Liste des catégories';
+    $page = 'categories';
     $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
 
     // Passage du message de delete par l'URL

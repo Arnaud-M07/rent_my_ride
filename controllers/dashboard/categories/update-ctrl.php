@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../../models/Category.php';
 
 try{
     $title = 'Modifier une catégorie';
+    $page = 'categories';
 
     $id_category = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)); // intval : transform la donnée en entier (sécurité)
     $category = Category::get($id_category);

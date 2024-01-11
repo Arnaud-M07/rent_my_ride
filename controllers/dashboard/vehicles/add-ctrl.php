@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../../models/Vehicles.php';
 
 try {
     $title = 'Ajout de véhicules';
+    $page = 'vehicles';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Tableau d'erreurs
