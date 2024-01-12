@@ -66,7 +66,8 @@
                     <small class="alert-message"><?= $error['vehiclePicture'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehiclePicture'] ?? '' ?></small>
                 </div>
-
+                <small class="alert-message"><?= $error['addVehicle'] ?? '' ?></small>
+                <small class="addToBdd-message"><?= $addedToDb['addVehicle'] ?? '' ?></small>
             </div>
             <div class="row">
                 <div class="col-12 col-xl-6 col-form-button">

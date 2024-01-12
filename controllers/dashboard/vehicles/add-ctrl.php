@@ -80,12 +80,23 @@ try {
                 $extension = pathinfo($_FILES['vehiclePicture']['name'], PATHINFO_EXTENSION);
 
                 $from = $_FILES['vehiclePicture']['tmp_name'];
-                $to = __DIR__ . '/../public/uploads/users/' . $filename . '.' . $extension;
+                $to = __DIR__ . '../../../public/uploads/vehicles' . $filename . '.' . $extension;
                 $toFront = $filename . '.' . $extension;
 
                 move_uploaded_file($from, $to);
             } catch (\Throwable $th) {
                 $error['vehiclePicture'] = $th->getMessage();
+            }
+        }
+        // Envoi en BDD
+        if (empty($error)) {
+            $vehicle = new Vehicle($vehicleBrand, $vehicleModel, $vehicleRegistration, $vehicleMileage, $vehiclePicture);
+            $result = $vehicle->insert();
+            // Messages
+            if ($result) {
+                $addedToDb['addVehicle'] = "Entrée insérée dans la table 'vehicles'";
+            } else {
+                $error['addVehicle'] = 'Erreur de serveur : la donnée n\'a pas été insérée';
             }
         }
     }

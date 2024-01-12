@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/Category.php';
 
-class Vehicles{
+class Vehicle{
 
     private ?int $id_vehicle;
     private string $brand;
@@ -64,6 +64,46 @@ class Vehicles{
     }
 
     // created_at
+    public function setCreatedAt(?string $created_at){
+        $this->created_at = $created_at;
+    }
+    public function getCreatedAt(): string{
+        return $this->created_at;
+    }
+
     // updated_at
+    public function setUpdatedAt(?string $updated_at){
+        $this->updated_at = $updated_at;
+    }
+    public function getUpdatedAt(): string{
+        return $this->updated_at;
+    }
+
     // deleted_at
+    public function setDeletedAt(?string $deleted_at){
+        $this->deleted_at = $deleted_at;
+    }
+    public function getDeletedAt(): string{
+        return $this->deleted_at;
+    }
+
+    // INSERT BDD
+    public function insert(){
+        // Connexion BDD et envoi
+        $pdo = Database::connect();
+        $sql = "INSERT INTO `vehicles`(`brand`, `model`, `registration`, `mileage`, `picture`)
+                VALUES(:vehicleBrand, :vehicleModel, :vehicleRegistration, :vehicleMileage, :vehiclePicture);"; // Est egal à $categoryName (sécurité)
+
+        // Préparation de la requête
+        $sth = $pdo->prepare($sql); //prepare() = permet d'eviter les injections SQL / sth = statement handle
+        $sth->bindValue(':vehicleBrand', $this->getBrand());
+        $sth->bindValue(':vehicleModel', $this->getModel());
+        $sth->bindValue(':vehicleRegistration', $this->getRegistration());
+        $sth->bindValue(':vehicleMileage', $this->getMileage());
+        $sth->bindValue(':vehiclePicture', $this->getPicture());
+        $result = $sth->execute();
+
+        return $result;
+    }
+
 }
