@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . '/../../../config/const.php';
-require_once __DIR__ . '/../../../models/Vehicles.php';
+require_once __DIR__ . '/../../../models/Vehicle.php';
 require_once __DIR__ . '/../../../models/Category.php';
 
 
@@ -8,6 +7,10 @@ try {
     $title = 'Ajout de véhicules';
     $page = 'vehicles';
     $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
+
+    $arrayCategoryIds = array_map(function($category) {
+        return $category->id_category;
+    }, $categories);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Tableau d'erreurs
@@ -60,14 +63,21 @@ try {
                 $error['vehicleMileage'] = 'Le kilométrage renseigné n\'est pas valide.';
             }
         }
-
+        
         // vehicleCATEGORY
-        $vehicleCategory = filter_input(INPUT_POST, 'vehicleCategory', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        if (!empty($vehicleCategory) && !in_array($vehicleCategory, ARRAY_VEHICLE_CATEGORY)) {
-            $error['vehicleCategory'] = 'La catégorie renseignée n\'est pas valide';
+        $vehicleCategory = filter_input(INPUT_POST, 'vehicleCategory', FILTER_SANITIZE_NUMBER_INT);
+        if (empty($vehicleCategory)) {
+            $error['vehicleCategory'] = 'Veuillez renseigner une catégorie';
+        } else {
+            $isOk = filter_var($vehicleCategory, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
+
+            if (!$isOk || !in_array($vehicleCategory, $arrayCategoryIds)) {
+                $error['vehicleCategory'] = 'La catégorie renseignée n\'est pas valide.';
+            }
         }
 
         // vehiclePICTURE
+        $vehiclePicture = null;
         if (!empty($_FILES['vehiclePicture']['name'])) { // Photo non obligatoire
             try {
                 if ($_FILES['vehiclePicture']['error'] != 0) {
@@ -84,7 +94,7 @@ try {
 
                 $from = $_FILES['vehiclePicture']['tmp_name'];
                 $to = __DIR__ . '../../../public/uploads/vehicles' . $filename . '.' . $extension;
-                $toFront = $filename . '.' . $extension;
+                $vehiclePicture = $filename . '.' . $extension;
 
                 move_uploaded_file($from, $to);
             } catch (\Throwable $th) {
@@ -93,7 +103,7 @@ try {
         }
         // Envoi en BDD
         if (empty($error)) {
-            $vehicle = new Vehicle($vehicleBrand, $vehicleModel, $vehicleRegistration, $vehicleMileage, $vehiclePicture);
+            $vehicle = new Vehicle($vehicleBrand, $vehicleModel, $vehicleRegistration, $vehicleMileage, $vehiclePicture, null, null, null, null, $vehicleCategory);
             $result = $vehicle->insert();
             // Messages
             if ($result) {

@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/Category.php';
+require_once __DIR__ . '/../config/const.php';
+require_once __DIR__ . '/../helpers/Database.php';
 
 class Vehicle{
 
@@ -14,13 +16,37 @@ class Vehicle{
     private ?string $deleted_at;
     private ?int $id_category;
 
-    public function __construct(string $brand = '', string $model = '', string $registration = '', int $mileage = 0, ?string $picture = null, ?int $id_vehicle = null){
-        $this->brand = $brand;
-        $this->model = $model;
-        $this->registration = $registration;
-        $this->mileage = $mileage;
-        $this->picture = $picture;
+    // Méthode magique construct
+    public function __construct(
+        string $brand = '',
+        string $model = '',
+        string $registration = '',
+        int $mileage = 0,
+        string $picture = null,
+        string $created_at = null,
+        string $updated_at = null,
+        string $deleted_at = null,
+        int $id_vehicle = null,
+        int $id_category = null) {
+
+            $this->id_category = $id_category;
+            $this->id_vehicle = $id_vehicle;
+            $this->brand = $brand;
+            $this->model = $model;
+            $this->registration = $registration;
+            $this->mileage = $mileage;
+            $this->picture = $picture;
+            $this->created_at = $created_at;
+            $this->updated_at = $updated_at;
+            $this->deleted_at = $deleted_at;
+        }
+
+    // $id_vehicles
+    public function setIdVehicles(?int $id_vehicle){
         $this->id_vehicle = $id_vehicle;
+    }
+    public function getIdVehicles(): ?int{
+        return $this->id_vehicle;
     }
 
     // $brand
@@ -67,7 +93,7 @@ class Vehicle{
     public function setCreatedAt(?string $created_at){
         $this->created_at = $created_at;
     }
-    public function getCreatedAt(): string{
+    public function getCreatedAt(): ?string{
         return $this->created_at;
     }
 
@@ -75,7 +101,7 @@ class Vehicle{
     public function setUpdatedAt(?string $updated_at){
         $this->updated_at = $updated_at;
     }
-    public function getUpdatedAt(): string{
+    public function getUpdatedAt(): ?string{
         return $this->updated_at;
     }
 
@@ -83,16 +109,24 @@ class Vehicle{
     public function setDeletedAt(?string $deleted_at){
         $this->deleted_at = $deleted_at;
     }
-    public function getDeletedAt(): string{
+    public function getDeletedAt(): ?string{
         return $this->deleted_at;
+    }
+
+    // id_category
+    public function setIdCategory(int $id_category){
+        $this->id_category = $id_category;
+    }
+    public function getIdCategory(): int{
+        return $this->id_category;
     }
 
     // INSERT BDD
     public function insert(){
         // Connexion BDD et envoi
         $pdo = Database::connect();
-        $sql = "INSERT INTO `vehicles`(`brand`, `model`, `registration`, `mileage`, `picture`)
-                VALUES(:vehicleBrand, :vehicleModel, :vehicleRegistration, :vehicleMileage, :vehiclePicture);";
+        $sql = "INSERT INTO `vehicles`(`brand`, `model`, `registration`, `mileage`, `picture`, `id_category`)
+                VALUES(:vehicleBrand, :vehicleModel, :vehicleRegistration, :vehicleMileage, :vehiclePicture, :id_category);";
 
         // Préparation de la requête
         $sth = $pdo->prepare($sql); //prepare() = permet d'eviter les injections SQL / sth = statement handle
@@ -101,6 +135,7 @@ class Vehicle{
         $sth->bindValue(':vehicleRegistration', $this->getRegistration());
         $sth->bindValue(':vehicleMileage', $this->getMileage());
         $sth->bindValue(':vehiclePicture', $this->getPicture());
+        $sth->bindValue(':id_category', $this->getIdCategory());
         $result = $sth->execute();
 
         return $result;

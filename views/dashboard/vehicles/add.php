@@ -47,15 +47,14 @@
                 <!-- vehicleCategory -->
                 <div class="col col-md-6">
                     <label for="vehicleCategory">Catégorie du véhicule</label>
-                    <select class="form-select" name="vehicleCategory" id="vehicleCategory" aria-label="Floating label select example">
+                    <select class="form-select listNames" name="vehicleCategory" id="vehicleCategory" aria-label="Floating label select example">
                         <option value="" class="listNames" disabled selected hidden><?= 'séléctionnez une catégorie' ?></option>
                         <?php foreach ($categories as $category) {
-                            $isSelected = ($category->name && $actegory->name == $categories) ? 'selected' : '';
-                            echo "<option class=\"listNames\" value=\"$category->name\" $isSelected>$category->name</option>";
+                            $isSelected = ($category->name && $category->name == $categories) ? 'selected' : '';
+                            echo "<option value=\"$category->id_category\" $isSelected>" . ucfirst(strtolower($category->name)) . "</option>";
                         }
                         ?>
                     </select>
-
                     <small class="alert-message"><?= $error['vehicleCategory'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehicleCategory'] ?? '' ?></small>
                 </div>
