@@ -15,14 +15,14 @@
                 <!-- vehicleBrand -->
                 <div class="col col-md-6">
                     <label for="vehicleBrand" class="form-label">Marque du véhicule :</label>
-                    <input pattern="<?= REGEX_CATEGORY ?>" value="<?= $vehicleBrand ?? '' ?>" name="vehicleBrand" type="text" class="form-control" placeholder="Entrez la marque du véhicule" id="vehicleBrand" required>
+                    <input pattern="<?= REGEX_CATEGORY ?>" value="<?= $vehicleBrand ?? '' ?>" name="vehicleBrand" type="text" class="form-control" placeholder="" id="vehicleBrand" required>
                     <small class="alert-message"><?= $error['vehicleBrand'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehicleBrand'] ?? '' ?></small>
                 </div>
                 <!-- vehicleModel -->
                 <div class="col col-md-6">
                     <label for="vehicleModel" class="form-label">Modèle du véhicule :</label>
-                    <input pattern="<?= REGEX_CATEGORY ?>" value="<?= $vehicleModel ?? '' ?>" name="vehicleModel" type="text" class="form-control" placeholder="Entrez le modèle du véhicule" id="vehicleModel" required>
+                    <input pattern="<?= REGEX_CATEGORY ?>" value="<?= $vehicleModel ?? '' ?>" name="vehicleModel" type="text" class="form-control" placeholder="" id="vehicleModel" required>
                     <small class="alert-message"><?= $error['vehicleModel'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehicleModel'] ?? '' ?></small>
                 </div>
@@ -31,14 +31,14 @@
                 <!-- vehicleRegistration -->
                 <div class="col col-md-6">
                     <label for="vehicleRegistration" class="form-label">Immatriculation du véhicule :</label>
-                    <input pattern="<?= REGEX_REGISTRATION ?>" value="<?= $vehicleRegistration ?? '' ?>" name="vehicleRegistration" type="text" class="form-control" placeholder="Entrez l'immatriculation du véhicule" id="vehicleRegistration" required>
+                    <input pattern="<?= REGEX_REGISTRATION ?>" value="<?= $vehicleRegistration ?? '' ?>" name="vehicleRegistration" type="text" class="form-control" placeholder="AB-123-CD" id="vehicleRegistration" required>
                     <small class="alert-message"><?= $error['vehicleRegistration'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehicleRegistration'] ?? '' ?></small>
                 </div>
                 <!-- vehicleMileage -->
                 <div class="col col-md-6">
                     <label for="vehicleMileage" class="form-label">Kilométrage du véhicule :</label>
-                    <input pattern="<?= REGEX_MILEAGE ?>" value="<?= $vehicleMileage ?? '' ?>" name="vehicleMileage" type="number" class="form-control" placeholder="Entrez le kilométrage du véhicule" id="vehicleMileage" required>
+                    <input pattern="<?= REGEX_MILEAGE ?>" value="<?= $vehicleMileage ?? '' ?>" name="vehicleMileage" type="number" class="form-control" placeholder="" id="vehicleMileage" required>
                     <small class="alert-message"><?= $error['vehicleMileage'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehicleMileage'] ?? '' ?></small>
                 </div>
@@ -48,10 +48,10 @@
                 <div class="col col-md-6">
                     <label for="vehicleCategory">Catégorie du véhicule</label>
                     <select class="form-select" name="vehicleCategory" id="vehicleCategory" aria-label="Floating label select example">
-                        <option value="" disabled selected hidden><?= 'Séléctionnez une catégorie' ?></option>
-                        <?php foreach (ARRAY_VEHICLE_CATEGORY as $categories) {
-                            $isSelected = ($category && $actegory == $categories) ? 'selected' : '';
-                            echo "<option value=\"$categories\" $isSelected>$categories</option>";
+                        <option value="" class="listNames" disabled selected hidden><?= 'séléctionnez une catégorie' ?></option>
+                        <?php foreach ($categories as $category) {
+                            $isSelected = ($category->name && $actegory->name == $categories) ? 'selected' : '';
+                            echo "<option class=\"listNames\" value=\"$category->name\" $isSelected>$category->name</option>";
                         }
                         ?>
                     </select>

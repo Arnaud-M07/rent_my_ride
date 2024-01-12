@@ -92,7 +92,7 @@ class Vehicle{
         // Connexion BDD et envoi
         $pdo = Database::connect();
         $sql = "INSERT INTO `vehicles`(`brand`, `model`, `registration`, `mileage`, `picture`)
-                VALUES(:vehicleBrand, :vehicleModel, :vehicleRegistration, :vehicleMileage, :vehiclePicture);"; // Est egal à $categoryName (sécurité)
+                VALUES(:vehicleBrand, :vehicleModel, :vehicleRegistration, :vehicleMileage, :vehiclePicture);";
 
         // Préparation de la requête
         $sth = $pdo->prepare($sql); //prepare() = permet d'eviter les injections SQL / sth = statement handle

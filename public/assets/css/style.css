@@ -22,6 +22,14 @@ h1{
     background-color: #ee6b4b!important;
 } */
 
+.listNames::first-letter{
+    text-transform: capitalize;
+}
+
+.section-add-vehicle .listNames::first-letter{
+    text-transform: capitalize;
+}
+
 
 
 
@@ -70,7 +78,7 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding:15vw 5vw ;
+    padding:10vw 5vw ;
 }
 
 .section-list-category .col-add-cat{

@@ -26,7 +26,7 @@
                     foreach ($categories as $category) { ?>
                         <tr>
                             <th scope='row'><?= $category->id_category ?></th>
-                            <td><?= $category->name ?></td>
+                            <td class="listNames"><?= $category->name ?></td>
                             <td>
                                 <a class='btn btn-dark btn-modify' href='/controllers/dashboard/categories/update-ctrl.php?id=<?= $category->id_category ?>'>
                                     <i class='bi bi-pencil-square'></i>

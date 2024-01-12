@@ -1,10 +1,13 @@
 <?php
 require_once __DIR__ . '/../../../config/const.php';
 require_once __DIR__ . '/../../../models/Vehicles.php';
+require_once __DIR__ . '/../../../models/Category.php';
+
 
 try {
     $title = 'Ajout de véhicules';
     $page = 'vehicles';
+    $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Tableau d'erreurs

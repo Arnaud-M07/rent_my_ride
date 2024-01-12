@@ -1,6 +1,6 @@
 <?php
 // REGEX
-define('REGEX_CATEGORY', '^[A-Za-zéèëêçà\d]{2,25}(-| )?([A-Za-zéèçà\d]{2,25})?$');
+define('REGEX_CATEGORY', '^[A-Za-zéèëêçà\d]{2,25}(-| )?[A-Za-zéèçà\d]{2,25}$');
 define('REGEX_REGISTRATION','^[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}$');
 define('REGEX_MILEAGE', '^[0-9]{6}$');
 define('ARRAY_TYPES', ['image/jpeg', 'image/png']);
