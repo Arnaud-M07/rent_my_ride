@@ -10,9 +10,9 @@ try {
         
         $error = [];
         $addedToDb = [];
-        
-        $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_SPECIAL_CHARS);
+
         // Nettoyage de la donnée
+        $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_SPECIAL_CHARS);
         if (empty($categoryName)) {
             $error['categoryName'] = 'Veuillez renseigner une catégorie à ajouter.';
         } else {

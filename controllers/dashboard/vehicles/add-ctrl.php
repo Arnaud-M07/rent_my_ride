@@ -7,7 +7,7 @@ try {
     $title = 'Ajout de véhicules';
     $page = 'vehicles';
     $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
-
+    // Récupération des catégories par leur id (dropdown input)
     $arrayCategoryIds = array_map(function($category) {
         return $category->id_category;
     }, $categories);
