@@ -93,7 +93,7 @@ try {
                 $extension = pathinfo($_FILES['vehiclePicture']['name'], PATHINFO_EXTENSION);
 
                 $from = $_FILES['vehiclePicture']['tmp_name'];
-                $to = __DIR__ . '../../../public/uploads/vehicles' . $filename . '.' . $extension;
+                $to = __DIR__ . '/../../../public/uploads/vehicles/' . $filename . '.' . $extension;
                 $vehiclePicture = $filename . '.' . $extension;
 
                 move_uploaded_file($from, $to);
