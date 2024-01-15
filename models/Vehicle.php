@@ -42,10 +42,10 @@ class Vehicle{
         }
 
     // $id_vehicles
-    public function setIdVehicles(?int $id_vehicle){
+    public function setIdVehicle(?int $id_vehicle){
         $this->id_vehicle = $id_vehicle;
     }
-    public function getIdVehicles(): ?int{
+    public function getIdVehicle(): ?int{
         return $this->id_vehicle;
     }
 
@@ -155,6 +155,50 @@ class Vehicle{
 
         $sth = $pdo->query($sql); // Prepare et execute
         $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
+
+        return $result;
+    }
+
+    // GET
+    // Récupère toutes les colonnes de la table 'vehicles' en fonction de l'id du véhicule
+    public static function get(int $id): object | false {
+        $pdo = Database::connect();
+        $sql = 'SELECT *
+                FROM `vehicles`
+                WHERE `id_vehicle` = :id_vehicle';
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_vehicle', $id, PDO::PARAM_INT);
+        $sth->execute();
+        $result = $sth->fetch(PDO::FETCH_OBJ); // Va chercher la table et la retourne sous forme d'objet
+        
+        return $result;
+    }
+
+    // UPDATE
+    // Modifier le nom du véhicule selon l'ID passé en URL
+    public function update(){
+        // Connexion BDD
+        $pdo = Database::connect();
+        // Requête SQL de sélection dans la table 'vehicles'
+        $sql = "UPDATE `vehicles`
+            SET `brand` = :vehicleBrand,
+                `model` = :vehicleModel,
+                `registration` = :vehicleRegistration,
+                `mileage` = :vehicleMileage,
+                `picture` = :vehiclePicture,
+                `id_category` = :id_category,
+            WHERE `id_vehicle` = :id_vehicle";
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':vehicleBrand', $this->getBrand());
+        $sth->bindValue(':vehicleModel', $this->getModel());
+        $sth->bindValue(':vehicleRegistration', $this->getRegistration());
+        $sth->bindValue(':vehicleMileage', $this->getMileage());
+        $sth->bindValue(':vehiclePicture', $this->getPicture());
+        $sth->bindValue(':id_category', $this->getIdCategory(), PDO::PARAM_INT); // Récupération de l'id passé en URL
+        $sth->bindValue(':id_vehicle', $this->getIdVehicle(), PDO::PARAM_INT);
+        $result = $sth->execute();
 
         return $result;
     }

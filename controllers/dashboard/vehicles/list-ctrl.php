@@ -1,11 +1,14 @@
 <?php
 
+require_once __DIR__ . '/../../../models/Category.php';
 require_once __DIR__ . '/../../../models/Vehicle.php';
 
 try {
     $title = 'Liste des véhicules';
     $page = 'vehicles'; 
+    $categories = Category::getAll();
     $vehicles = Vehicle::getAll();
+
 
 
 } catch(PDOException $e) {

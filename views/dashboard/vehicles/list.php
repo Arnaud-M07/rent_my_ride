@@ -27,10 +27,16 @@
                         <tr>
                             <th scope='row'><?= $vehicle->id_vehicle ?></th>
                             <td><?= $vehicle->brand ?></td>
-                            <td><?= $vehicle->model ?></</td>
-                            <td><?= $vehicle->id_category ?></td>
+                            <td><?= $vehicle->model ?></td>
+                            <?php
+                            foreach ($categories as $category) {
+                                if ($category->id_category == $vehicle->id_category) { ?>
+                                    <td><?= $category->name?></td><?php
+                                }
+                            }
+                            ?>
                             <td>
-                                <a class='btn btn-dark btn-modify' href='/controllers/dashboard/categories/update-ctrl.php?id=<?= $category->id_category ?>'>
+                                <a class='btn btn-dark btn-modify' href='/controllers/dashboard/vehicles/update-ctrl.php?id=<?= $vehicle->id_vehicle ?>'>
                                     <i class='bi bi-pencil-square'></i>
                                 </a>
                             </td>
