@@ -15,14 +15,28 @@
                 <!-- vehicleBrand -->
                 <div class="col col-md-6">
                     <label for="vehicleBrand" class="form-label">Marque du véhicule :</label>
-                    <input pattern="<?= REGEX_CATEGORY ?>" value="<?= $vehicleBrand ?? '' ?>" name="vehicleBrand" type="text" class="form-control" placeholder="" id="vehicleBrand" required>
+                    <input pattern="<?= REGEX_CATEGORY ?>" 
+                    value="<?= $vehicleBrand ?? '' ?>" 
+                    name="vehicleBrand" 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="" 
+                    id="vehicleBrand" 
+                    required>
                     <small class="alert-message"><?= $error['vehicleBrand'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehicleBrand'] ?? '' ?></small>
                 </div>
                 <!-- vehicleModel -->
                 <div class="col col-md-6">
                     <label for="vehicleModel" class="form-label">Modèle du véhicule :</label>
-                    <input pattern="<?= REGEX_CATEGORY ?>" value="<?= $vehicleModel ?? '' ?>" name="vehicleModel" type="text" class="form-control" placeholder="" id="vehicleModel" required>
+                    <input pattern="<?= REGEX_CATEGORY ?>" 
+                    value="<?= $vehicleModel ?? '' ?>" 
+                    name="vehicleModel" 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="" 
+                    id="vehicleModel" 
+                    required>
                     <small class="alert-message"><?= $error['vehicleModel'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehicleModel'] ?? '' ?></small>
                 </div>
@@ -31,14 +45,28 @@
                 <!-- vehicleRegistration -->
                 <div class="col col-md-6">
                     <label for="vehicleRegistration" class="form-label">Immatriculation du véhicule :</label>
-                    <input pattern="<?= REGEX_REGISTRATION ?>" value="<?= $vehicleRegistration ?? '' ?>" name="vehicleRegistration" type="text" class="form-control" placeholder="AB-123-CD" id="vehicleRegistration" required>
+                    <input pattern="<?= REGEX_REGISTRATION ?>" 
+                    value="<?= $vehicleRegistration ?? '' ?>" 
+                    name="vehicleRegistration" 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="AB-123-CD" 
+                    id="vehicleRegistration" 
+                    required>
                     <small class="alert-message"><?= $error['vehicleRegistration'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehicleRegistration'] ?? '' ?></small>
                 </div>
                 <!-- vehicleMileage -->
                 <div class="col col-md-6">
                     <label for="vehicleMileage" class="form-label">Kilométrage du véhicule :</label>
-                    <input pattern="<?= REGEX_MILEAGE ?>" value="<?= $vehicleMileage ?? '' ?>" name="vehicleMileage" type="number" class="form-control" placeholder="" id="vehicleMileage" required>
+                    <input pattern="<?= REGEX_MILEAGE ?>" 
+                    value="<?= $vehicleMileage ?? '' ?>" 
+                    name="vehicleMileage" 
+                    type="number" 
+                    class="form-control" 
+                    placeholder="" 
+                    id="vehicleMileage" 
+                    required>
                     <small class="alert-message"><?= $error['vehicleMileage'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehicleMileage'] ?? '' ?></small>
                 </div>
@@ -47,8 +75,15 @@
                 <!-- vehicleCategory -->
                 <div class="col col-md-6">
                     <label for="vehicleCategory">Catégorie du véhicule</label>
-                    <select class="form-select listNames" name="vehicleCategory" id="vehicleCategory" aria-label="Floating label select example">
-                        <option value="" class="listNames" disabled selected hidden><?= 'séléctionnez une catégorie' ?></option>
+                    <select class="form-select listNames" 
+                    name="vehicleCategory" 
+                    id="vehicleCategory" 
+                    aria-label="Floating label select example">
+                        <option value="" 
+                        class="listNames" 
+                        disabled 
+                        selected 
+                        hidden><?= 'séléctionnez une catégorie' ?></option>
                         <?php foreach ($categories as $category) {
                             $isSelected = ($category->name && $category->name == $categories) ? 'selected' : '';
                             echo "<option value=\"$category->id_category\" $isSelected>" . ucfirst(strtolower($category->name)) . "</option>";
@@ -61,7 +96,11 @@
                 <!-- vehiclePicture -->
                 <div class="col col-md-6">
                     <label for="vehiclePicture" class="form-label mb-0">Photo du véhicule</label>
-                    <input class="form-control" name="vehiclePicture" id="vehiclePicture" type="file" accept=".png, image/jpeg">
+                    <input class="form-control" 
+                    name="vehiclePicture" 
+                    id="vehiclePicture" 
+                    type="file" 
+                    accept=".png, image/jpeg">
                     <small class="alert-message"><?= $error['vehiclePicture'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehiclePicture'] ?? '' ?></small>
                 </div>

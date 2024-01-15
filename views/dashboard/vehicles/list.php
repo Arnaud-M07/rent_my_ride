@@ -12,21 +12,23 @@
         </div>
         <div class="div-table">
             <table class="table table-categories caption-top table-responsive">
-                <small class="addToBdd-message"><?= $msg ?></small>
+                <!-- <small class="addToBdd-message">  //$msg  </small> -->
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Marque du véhicule</th>
-                        <th></th>
-                        <th></th>
+                        <th scope="col">Marque</th>
+                        <th scope="col">Modèle</th>
+                        <th scope="col">Catégorie</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($categories as $category) { ?>
+                    foreach ($vehicles as $vehicle) { ?>
                         <tr>
-                            <th scope='row'><?= $category->id_category ?></th>
-                            <td><?= $category->name ?></td>
+                            <th scope='row'><?= $vehicle->id_vehicle ?></th>
+                            <td><?= $vehicle->brand ?></td>
+                            <td><?= $vehicle->model ?></</td>
+                            <td><?= $vehicle->id_category ?></td>
                             <td>
                                 <a class='btn btn-dark btn-modify' href='/controllers/dashboard/categories/update-ctrl.php?id=<?= $category->id_category ?>'>
                                     <i class='bi bi-pencil-square'></i>

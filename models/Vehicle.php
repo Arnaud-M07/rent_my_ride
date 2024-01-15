@@ -126,7 +126,12 @@ class Vehicle{
         // Connexion BDD et envoi
         $pdo = Database::connect();
         $sql = "INSERT INTO `vehicles`(`brand`, `model`, `registration`, `mileage`, `picture`, `id_category`)
-                VALUES(:vehicleBrand, :vehicleModel, :vehicleRegistration, :vehicleMileage, :vehiclePicture, :id_category);";
+                VALUES(:vehicleBrand, 
+                :vehicleModel, 
+                :vehicleRegistration, 
+                :vehicleMileage, 
+                :vehiclePicture, 
+                :id_category);";
 
         // Préparation de la requête
         $sth = $pdo->prepare($sql); //prepare() = permet d'eviter les injections SQL / sth = statement handle
@@ -137,6 +142,19 @@ class Vehicle{
         $sth->bindValue(':vehiclePicture', $this->getPicture());
         $sth->bindValue(':id_category', $this->getIdCategory());
         $result = $sth->execute();
+
+        return $result;
+    }
+
+    // GETALL
+    public static function getAll(): array {
+        // Connexion BDD et récupération 
+        $pdo = Database::connect();
+        $sql = 'SELECT *
+                FROM `vehicles`'; // $sql = 'SELECT `name`, `id_category` FROM `categories`';
+
+        $sth = $pdo->query($sql); // Prepare et execute
+        $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
 
         return $result;
     }

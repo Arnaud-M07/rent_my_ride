@@ -103,7 +103,17 @@ try {
         }
         // Envoi en BDD
         if (empty($error)) {
-            $vehicle = new Vehicle($vehicleBrand, $vehicleModel, $vehicleRegistration, $vehicleMileage, $vehiclePicture, null, null, null, null, $vehicleCategory);
+            $vehicle = new Vehicle(
+                $vehicleBrand, 
+                $vehicleModel, 
+                $vehicleRegistration, 
+                $vehicleMileage, 
+                $vehiclePicture, 
+                null, 
+                null, 
+                null, 
+                null, 
+                $vehicleCategory);
             $result = $vehicle->insert();
             // Messages
             if ($result) {
