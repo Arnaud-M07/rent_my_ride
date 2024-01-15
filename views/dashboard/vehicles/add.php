@@ -10,7 +10,7 @@
                 </a>
             </div>
         </div>
-        <form action="" method="POST" class="form" novalidate>
+        <form action="" method="POST" class="form" enctype="multipart/form-data" novalidate>
             <div class="row">
                 <!-- vehicleBrand -->
                 <div class="col col-md-6">
@@ -74,11 +74,11 @@
             <div class="row">
                 <!-- vehicleCategory -->
                 <div class="col col-md-6">
-                    <label for="vehicleCategory">Catégorie du véhicule</label>
+                    <label for="id_category">Catégorie du véhicule</label>
                     <select class="form-select listNames" 
-                    name="vehicleCategory" 
-                    id="vehicleCategory" 
-                    aria-label="Floating label select example">
+                    name="id_category" 
+                    id="id_category" 
+                    aria-label="Floating label">
                         <option value="" 
                         class="listNames" 
                         disabled 
@@ -90,8 +90,8 @@
                         }
                         ?>
                     </select>
-                    <small class="alert-message"><?= $error['vehicleCategory'] ?? '' ?></small>
-                    <small class="addToBdd-message"><?= $addedToDb['vehicleCategory'] ?? '' ?></small>
+                    <small class="alert-message"><?= $error['id_category'] ?? '' ?></small>
+                    <small class="addToBdd-message"><?= $addedToDb['id_category'] ?? '' ?></small>
                 </div>
                 <!-- vehiclePicture -->
                 <div class="col col-md-6">

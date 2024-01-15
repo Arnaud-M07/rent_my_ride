@@ -15,9 +15,6 @@ try {
         die;
     }
     $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
-    $arrayCategoryIds = array_map(function($category) {
-        return $category->id_category;
-    }, $categories);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Tableau d'erreurs
@@ -72,14 +69,15 @@ try {
         }
         
         // vehicleCATEGORY
-        $vehicleCategory = filter_input(INPUT_POST, 'vehicleCategory', FILTER_SANITIZE_NUMBER_INT);
+        $vehicleCategory = filter_input(INPUT_POST, 'id_category', FILTER_SANITIZE_NUMBER_INT);
         if (empty($vehicleCategory)) {
-            $error['vehicleCategory'] = 'Veuillez renseigner une catégorie';
+            $error['id_category'] = 'Veuillez renseigner une catégorie';
         } else {
+            $arrayCategoryIds = array_column($categories, 'id_category'); // Comparer l'id entré avec un tableau contenant tous les Id (tableu d'objet -> tableau de valeurs)
             $isOk = filter_var($vehicleCategory, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
 
             if (!$isOk || !in_array($vehicleCategory, $arrayCategoryIds)) {
-                $error['vehicleCategory'] = 'La catégorie renseignée n\'est pas valide.';
+                $error['id_category'] = 'La catégorie renseignée n\'est pas valide.';
             }
         }
 

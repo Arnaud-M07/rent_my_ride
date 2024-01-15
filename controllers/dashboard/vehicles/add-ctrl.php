@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../../config/const.php';
 require_once __DIR__ . '/../../../models/Vehicle.php';
 require_once __DIR__ . '/../../../models/Category.php';
 
@@ -7,10 +8,7 @@ try {
     $title = 'Ajout de véhicules';
     $page = 'vehicles';
     $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
-    // Récupération des catégories par leur id (dropdown input)
-    $arrayCategoryIds = array_map(function($category) {
-        return $category->id_category;
-    }, $categories);
+
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Tableau d'erreurs
@@ -23,19 +21,17 @@ try {
             $error['vehicleBrand'] = 'Veuillez renseigner la marque du véhicule';
         } else {
             $isOk = filter_var($vehicleBrand, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
-
             if (!$isOk) {
                 $error['vehicleBrand'] = 'La marque renseignée n\'est pas valide.';
             }
         }
-
+        
         // vehicleModel INPUT
         $vehicleModel = filter_input(INPUT_POST, 'vehicleModel', FILTER_SANITIZE_SPECIAL_CHARS);
         if (empty($vehicleModel)) {
             $error['vehicleModel'] = 'Veuillez renseigner le modèle du véhicule.';
         } else {
             $isOk = filter_var($vehicleModel, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
-
             if (!$isOk) {
                 $error['vehicleModel'] = 'Le modèle renseigné n\'est pas valide.';
             }
@@ -47,7 +43,6 @@ try {
             $error['vehicleRegistration'] = 'Veuillez renseigner l\'immatriculation du véhicule.';
         } else {
             $isOk = filter_var($vehicleRegistration, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_REGISTRATION . '/')));
-
             if (!$isOk) {
                 $error['vehicleRegistration'] = 'L\'immatriculation renseignée n\'est pas valide.';
             }
@@ -63,16 +58,16 @@ try {
                 $error['vehicleMileage'] = 'Le kilométrage renseigné n\'est pas valide.';
             }
         }
-        
-        // vehicleCATEGORY
-        $vehicleCategory = filter_input(INPUT_POST, 'vehicleCategory', FILTER_SANITIZE_NUMBER_INT);
-        if (empty($vehicleCategory)) {
-            $error['vehicleCategory'] = 'Veuillez renseigner une catégorie';
-        } else {
-            $isOk = filter_var($vehicleCategory, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
 
+        // vehicleCATEGORY
+        $vehicleCategory = filter_input(INPUT_POST, 'id_category', FILTER_SANITIZE_NUMBER_INT);
+        if (empty($vehicleCategory)) {
+            $error['id_category'] = 'Veuillez renseigner une catégorie';
+        } else {
+            $arrayCategoryIds = array_column($categories, 'id_category'); // Comparer l'id entré avec un tableau contenant tous les Id (tableu d'objet -> tableau de valeurs)
+            $isOk = filter_var($vehicleCategory, FILTER_VALIDATE_INT);
             if (!$isOk || !in_array($vehicleCategory, $arrayCategoryIds)) {
-                $error['vehicleCategory'] = 'La catégorie renseignée n\'est pas valide.';
+                $error['id_category'] = 'La catégorie renseignée n\'est pas valide.';
             }
         }
 
@@ -95,8 +90,8 @@ try {
                 $from = $_FILES['vehiclePicture']['tmp_name'];
                 $to = __DIR__ . '/../../../public/uploads/vehicles/' . $filename . '.' . $extension;
                 $vehiclePicture = $filename . '.' . $extension;
-
                 move_uploaded_file($from, $to);
+
             } catch (\Throwable $th) {
                 $error['vehiclePicture'] = $th->getMessage();
             }
@@ -104,16 +99,26 @@ try {
         // Envoi en BDD
         if (empty($error)) {
             $vehicle = new Vehicle(
-                $vehicleBrand, 
-                $vehicleModel, 
-                $vehicleRegistration, 
-                $vehicleMileage, 
-                $vehiclePicture, 
-                null, 
-                null, 
-                null, 
-                null, 
-                $vehicleCategory);
+                $vehicleBrand,
+                $vehicleModel,
+                $vehicleRegistration,
+                $vehicleMileage,
+                $vehiclePicture,
+                null,
+                null,
+                null,
+                null,
+                $vehicleCategory
+            );
+
+            // Methode SET / GET (vider la construct Vehicle et rendre tous les paramètres facultatifs)
+            // $vehicle->setBrand($brand);
+            // $vehicle->setModel($model);
+            // $vehicle->setRegistration($registration);
+            // $vehicle->setMileage($mileage);
+            // $vehicle->setPicture($picture);
+            // $vehicle->setIdCategory(intval($category));
+            // ...
             $result = $vehicle->insert();
             // Messages
             if ($result) {

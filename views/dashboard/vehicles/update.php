@@ -46,10 +46,10 @@
             <div class="row">
                 <!-- vehicleCategory -->
                 <div class="col col-md-6">
-                    <label for="vehicleCategory">Catégorie du véhicule</label>
+                    <label for="id_category">Catégorie du véhicule</label>
                     <select class="form-select listNames" 
-                    name="vehicleCategory" 
-                    id="vehicleCategory" 
+                    name="id_category" 
+                    id="id_category" 
                     aria-label="Floating label select example">
                         <?php foreach ($categories as $category) { 
                             $isSelected = ($category->id_category == $vehicle->id_category) ? 'selected' : '';

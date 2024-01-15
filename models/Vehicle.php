@@ -122,9 +122,10 @@ class Vehicle{
     }
 
     // INSERT BDD
-    public function insert(){
+    public function insert(): bool{
         // Connexion BDD et envoi
         $pdo = Database::connect();
+        // Requête d'insertion
         $sql = "INSERT INTO `vehicles`(`brand`, `model`, `registration`, `mileage`, `picture`, `id_category`)
                 VALUES(:vehicleBrand, 
                 :vehicleModel, 
@@ -138,12 +139,20 @@ class Vehicle{
         $sth->bindValue(':vehicleBrand', $this->getBrand());
         $sth->bindValue(':vehicleModel', $this->getModel());
         $sth->bindValue(':vehicleRegistration', $this->getRegistration());
-        $sth->bindValue(':vehicleMileage', $this->getMileage());
+        $sth->bindValue(':vehicleMileage', $this->getMileage(), PDO::PARAM_INT);
         $sth->bindValue(':vehiclePicture', $this->getPicture());
-        $sth->bindValue(':id_category', $this->getIdCategory());
+        $sth->bindValue(':id_category', $this->getIdCategory(), PDO::PARAM_INT);
+        // 4 Possibilités égales : 
+        // *1
         $result = $sth->execute();
-
         return $result;
+        // *2
+        // $nbrows = $sth->rowCount();
+        // return $nbrows > 0 ? true : false
+        // *3
+        // return $sth->rowCount() > 0;
+        // *4
+        // return (bool) $sth->rowCount();
     }
 
     // GETALL

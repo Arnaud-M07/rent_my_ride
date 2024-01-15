@@ -32,7 +32,7 @@ class Category{
     }
 
     // INSERT BDD
-    public function insert(){
+    public function insert(): bool{
         // Connexion BDD et envoi
         $pdo = Database::connect();
         $sql = "INSERT INTO `categories`(`name`)
