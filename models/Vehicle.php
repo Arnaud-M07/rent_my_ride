@@ -213,4 +213,19 @@ class Vehicle{
         return $result;
     }
 
+        // DELETE
+    // Supprimer une entrée dans une table
+    public static function delete(int $id){
+        $pdo = Database::connect();
+        // Requête SQL
+        $sql = "DELETE FROM `vehicles`
+                WHERE `id_vehicle` = :id_vehicle";
+
+        $sth = $pdo->prepare($sql); // Prepare est une methode appartenant à la classe PDO, elle attend une chaine de caractère en paramètre d'entrée. Elle retourne un objet de type PDOStatement
+        $sth->bindValue(':id_vehicle', $id, PDO::PARAM_INT);
+        $result = $sth->execute();
+
+        return $result;
+    }
+
 }

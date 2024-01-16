@@ -27,16 +27,8 @@
                         <tr>
                             <th scope='row'><?= $category->id_category ?></th>
                             <td class="listNames"><?= $category->name ?></td>
-                            <td>
-                                <a class='btn btn-dark btn-modify' href='/controllers/dashboard/categories/update-ctrl.php?id=<?= $category->id_category ?>'>
-                                    <i class='bi bi-pencil-square'></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a class='btn btn-dark btn-delete' onclick=" return confirm(`Voulez-vous vraiment supprimer l'\enregistrement' <?= $category->id_category ?> : <?= $category->name ?>' ?`)" href='/controllers/dashboard/categories/delete-ctrl.php?id=<?= $category->id_category ?>'>
-                                    <i class='bi bi-trash'></i>
-                                </a>
-                            </td>
+                            <td><a class='btn btn-dark btn-modify' href='/controllers/dashboard/categories/update-ctrl.php?id=<?= $category->id_category ?>'><i class='bi bi-pencil-square'></i></a></td>
+                            <td><a class='btn btn-dark btn-delete' onclick=" return confirm(`Voulez-vous vraiment supprimer l'\enregistrement' <?= $category->id_category ?> : <?= $category->name ?>' ?`)" href='/controllers/dashboard/categories/delete-ctrl.php?id=<?= $category->id_category ?>'><i class='bi bi-trash'></i></a></td>
                         </tr>
                     <?php }
                     ?>

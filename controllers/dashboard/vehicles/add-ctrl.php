@@ -111,7 +111,6 @@ try {
                 null,
                 $vehicleCategory
             );
-            var_dump($vehicle);
 
             // Methode SET / GET (vider la construct Vehicle et rendre tous les paramètres facultatifs)
             // $vehicle->setBrand($brand);
