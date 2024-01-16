@@ -19,6 +19,8 @@
                         <th scope="col">Marque</th>
                         <th scope="col">Modèle</th>
                         <th scope="col">Catégorie</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,13 +30,7 @@
                             <th scope='row'><?= $vehicle->id_vehicle ?></th>
                             <td><?= $vehicle->brand ?></td>
                             <td><?= $vehicle->model ?></td>
-                            <?php
-                            foreach ($categories as $category) {
-                                if ($category->id_category == $vehicle->id_category) { ?>
-                                    <td><?= $category->name?></td><?php
-                                }
-                            }
-                            ?>
+                            <td><?= $vehicle->name ?></td> <!-- LEFT JOIN $category->name -->
                             <td>
                                 <a class='btn btn-dark btn-modify' href='/controllers/dashboard/vehicles/update-ctrl.php?id=<?= $vehicle->id_vehicle ?>'>
                                     <i class='bi bi-pencil-square'></i>

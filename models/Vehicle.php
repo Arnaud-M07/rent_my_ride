@@ -160,7 +160,8 @@ class Vehicle{
         // Connexion BDD et récupération 
         $pdo = Database::connect();
         $sql = 'SELECT *
-                FROM `vehicles`'; // $sql = 'SELECT `name`, `id_category` FROM `categories`';
+                FROM `vehicles`
+                INNER JOIN `categories` ON `vehicles`.`id_category` = `categories`.`id_category`'; // Ajout du nom de la catégorie dans la class Vehicles
 
         $sth = $pdo->query($sql); // Prepare et execute
         $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
@@ -196,7 +197,7 @@ class Vehicle{
                 `registration` = :vehicleRegistration,
                 `mileage` = :vehicleMileage,
                 `picture` = :vehiclePicture,
-                `id_category` = :id_category,
+                `id_category` = :id_category
             WHERE `id_vehicle` = :id_vehicle";
 
         $sth = $pdo->prepare($sql);

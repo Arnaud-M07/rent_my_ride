@@ -100,8 +100,8 @@ try {
                 $from = $_FILES['vehiclePicture']['tmp_name'];
                 $to = __DIR__ . '/../../../public/uploads/vehicles/' . $filename . '.' . $extension;
                 $vehiclePicture = $filename . '.' . $extension;
-
                 move_uploaded_file($from, $to);
+
             } catch (\Throwable $th) {
                 $error['vehiclePicture'] = $th->getMessage();
             }
@@ -118,8 +118,9 @@ try {
                 null, 
                 null, 
                 null, 
-                null, 
+                $id_vehicle, 
                 $vehicleCategory);
+
             $result = $vehicle->update();
             // Messages
             if ($result) {
@@ -127,6 +128,8 @@ try {
             } else {
                 $error['addVehicle'] = 'Erreur de serveur : la donnée n\'a pas été insérée';
             }
+
+            
         }
     }
 
