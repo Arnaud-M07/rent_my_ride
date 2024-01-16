@@ -156,13 +156,13 @@ class Vehicle{
     }
 
     // GETALL
-    public static function getAll(): array {
+    public static function getAll(): array|false {
         // Connexion BDD et récupération 
         $pdo = Database::connect();
-        $sql = 'SELECT *
+        $sql = 'SELECT *, `categories`.`name` AS `categoryName`
                 FROM `vehicles`
-                INNER JOIN `categories` ON `vehicles`.`id_category` = `categories`.`id_category`'; // Ajout du nom de la catégorie dans la class Vehicles
-
+                INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`'; // Ajout du nom de la catégorie dans la class Vehicles / Liaison de la clé primaire à la clé trangère.
+                // ... ORDER BY`categories`.`name` 
         $sth = $pdo->query($sql); // Prepare et execute
         $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
 

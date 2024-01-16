@@ -1,20 +1,13 @@
 <?php
-
-require_once __DIR__ . '/../../../models/Category.php';
 require_once __DIR__ . '/../../../models/Vehicle.php';
 
 try {
     $title = 'Liste des véhicules';
     $page = 'vehicles'; 
-    $categories = Category::getAll();
     $vehicles = Vehicle::getAll();
-
-
-
 } catch(PDOException $e) {
     echo "Erreur : " . $e->getMessage();
 }
-
 
 include __DIR__ . '/../../../views/templates/dashboard/header_dashboard.php';
 include __DIR__ . '/../../../views/templates/dashboard/navbar_dashboard.php';

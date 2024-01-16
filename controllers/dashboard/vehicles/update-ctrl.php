@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . "/../../../config/const.php";
 require_once __DIR__ . "/../../../models/Category.php";
 require_once __DIR__ . "/../../../models/Vehicle.php";
@@ -27,7 +26,6 @@ try {
             $error['vehicleBrand'] = 'Veuillez renseigner la marque du véhicule';
         } else {
             $isOk = filter_var($vehicleBrand, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
-
             if (!$isOk) {
                 $error['vehicleBrand'] = 'La marque renseignée n\'est pas valide.';
             }
@@ -39,7 +37,6 @@ try {
             $error['vehicleModel'] = 'Veuillez renseigner le modèle du véhicule.';
         } else {
             $isOk = filter_var($vehicleModel, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
-
             if (!$isOk) {
                 $error['vehicleModel'] = 'Le modèle renseigné n\'est pas valide.';
             }
@@ -51,7 +48,6 @@ try {
             $error['vehicleRegistration'] = 'Veuillez renseigner l\'immatriculation du véhicule.';
         } else {
             $isOk = filter_var($vehicleRegistration, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_REGISTRATION . '/')));
-
             if (!$isOk) {
                 $error['vehicleRegistration'] = 'L\'immatriculation renseignée n\'est pas valide.';
             }
@@ -75,7 +71,6 @@ try {
         } else {
             $arrayCategoryIds = array_column($categories, 'id_category'); // Comparer l'id entré avec un tableau contenant tous les Id (tableu d'objet -> tableau de valeurs)
             $isOk = filter_var($vehicleCategory, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
-
             if (!$isOk || !in_array($vehicleCategory, $arrayCategoryIds)) {
                 $error['id_category'] = 'La catégorie renseignée n\'est pas valide.';
             }
@@ -101,7 +96,6 @@ try {
                 $to = __DIR__ . '/../../../public/uploads/vehicles/' . $filename . '.' . $extension;
                 $vehiclePicture = $filename . '.' . $extension;
                 move_uploaded_file($from, $to);
-
             } catch (\Throwable $th) {
                 $error['vehiclePicture'] = $th->getMessage();
             }
@@ -128,8 +122,6 @@ try {
             } else {
                 $error['addVehicle'] = 'Erreur de serveur : la donnée n\'a pas été insérée';
             }
-
-            
         }
     }
 

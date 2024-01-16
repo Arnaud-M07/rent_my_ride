@@ -31,16 +31,8 @@
                             <td><?= $vehicle->brand ?></td>
                             <td><?= $vehicle->model ?></td>
                             <td><?= $vehicle->name ?></td> <!-- LEFT JOIN $category->name -->
-                            <td>
-                                <a class='btn btn-dark btn-modify' href='/controllers/dashboard/vehicles/update-ctrl.php?id=<?= $vehicle->id_vehicle ?>'>
-                                    <i class='bi bi-pencil-square'></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a class='btn btn-dark btn-delete' onclick="return confirm('Voulez-vous vraiment supprimer cet enregistrement ?')" href='/controllers/dashboard/categories/delete-ctrl.php?id=<?= $category->id_category ?>'>
-                                    <i class='bi bi-trash'></i>
-                                </a>
-                            </td>
+                            <td><a class='btn btn-dark btn-modify' href='/controllers/dashboard/vehicles/update-ctrl.php?id=<?= $vehicle->id_vehicle ?>'><i class='bi bi-pencil-square'></i></a></td>
+                            <td><a class='btn btn-dark btn-delete' onclick="return confirm('Voulez-vous vraiment supprimer cet enregistrement ?')" href='/controllers/dashboard/categories/delete-ctrl.php?id=<?= $category->id_category ?>'><i class='bi bi-trash'></i></a></td>
                         </tr>
                     <?php }
                     ?>
