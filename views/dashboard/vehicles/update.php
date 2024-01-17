@@ -10,7 +10,7 @@
                 </a>
             </div>
         </div>
-        <form action="" method="POST" class="form" novalidate>
+        <form action="" method="POST" class="form" novalidate enctype="multipart/form-data">
             <div class="row">
                 <!-- vehicleBrand -->
                 <div class="col col-md-6">

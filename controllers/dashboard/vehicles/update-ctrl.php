@@ -9,7 +9,6 @@ try {
     
     $id_vehicle = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)); // intval : transform la donnée en entier (sécurité)
     $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
-
     $vehicle = Vehicle::get($id_vehicle);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -74,11 +73,8 @@ try {
         }
 
         // vehiclePICTURE
-        $vehiclePicture = null;
-        if (empty($_FILES['vehiclePicture']['name'])){
-            // Ajouter le nom présent en BDD
-            $vehiclePicture = $vehicle->picture;
-        } elseif (!empty($_FILES['vehiclePicture']['name'])) { // Photo non obligatoire
+        $vehiclePicture = $vehicle->picture ?? null;
+        if (!empty($_FILES['vehiclePicture']['name'])) { // Photo non obligatoire
             try {
                 if ($_FILES['vehiclePicture']['error'] != 0) {
                     throw new Exception("Une erreur s'est produite.");
@@ -96,6 +92,7 @@ try {
                 $to = __DIR__ . '/../../../public/uploads/vehicles/' . $filename . '.' . $extension;
                 $vehiclePicture = $filename . '.' . $extension;
                 move_uploaded_file($from, $to);
+                
             } catch (\Throwable $th) {
                 $error['vehiclePicture'] = $th->getMessage();
             }

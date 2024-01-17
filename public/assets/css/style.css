@@ -94,3 +94,9 @@ align-items: center;
     padding: 30px 80px;
     background-color: #FFF;
 }
+
+
+.vehicle-img{
+    height: 50px; 
+    object-fit: cover;
+}

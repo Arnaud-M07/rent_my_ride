@@ -19,6 +19,7 @@
                         <th scope="col">Marque</th>
                         <th scope="col">Modèle</th>
                         <th scope="col">Catégorie</th>
+                        <th scope="col">Image</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -31,6 +32,7 @@
                             <td><?= $vehicle->brand ?></td>
                             <td><?= $vehicle->model ?></td>
                             <td><?= $vehicle->name ?></td> <!-- LEFT JOIN $category->name -->
+                            <td><img src='/public/uploads/vehicles/<?= $vehicle->picture ?>' class="vehicle-img" alt='Image du véhicule'></td>
                             <td><a class='btn btn-dark btn-modify' href='/controllers/dashboard/vehicles/update-ctrl.php?id=<?= $vehicle->id_vehicle ?>'><i class='bi bi-pencil-square'></i></a></td>
                             <td><a class='btn btn-dark btn-delete' onclick="return confirm('Voulez-vous vraiment supprimer cet enregistrement ?')" href='/controllers/dashboard/vehicles/delete-ctrl.php?id=<?= $vehicle->id_vehicle ?>'><i class='bi bi-trash'></i></a></td>
                         </tr>

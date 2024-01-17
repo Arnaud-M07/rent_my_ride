@@ -213,7 +213,7 @@ class Vehicle{
         return $result;
     }
 
-        // DELETE
+    // DELETE
     // Supprimer une entrée dans une table
     public static function delete(int $id){
         $pdo = Database::connect();
