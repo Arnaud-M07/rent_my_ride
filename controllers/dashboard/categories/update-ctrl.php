@@ -8,11 +8,6 @@ try {
     $page = 'categories';
 
     $id_category = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)); // intval : transform la donnée en entier (sécurité)
-    $category = Category::get($id_category);
-    if (!$category) {
-        header('Location: /controllers/dashboard/categories/list-ctrl.php');
-        die;
-    }
 
     // Mettre la valeur dans l'input
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -46,8 +41,14 @@ try {
                 $error['categoryName'] = 'Erreur de serveur : la donnée n\'a pas été insérée';
             }
         }
-        $category = Category::get($id_category);
     }
+
+    $category = Category::get($id_category);
+    if (!$category) {
+        header('Location: /controllers/dashboard/categories/list-ctrl.php');
+        die;
+    }
+
 } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
 }

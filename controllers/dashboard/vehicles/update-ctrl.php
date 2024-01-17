@@ -6,14 +6,11 @@ require_once __DIR__ . "/../../../models/Vehicle.php";
 try {
     $title = 'Modifier un véhicule';
     $page = 'vehicles';
-
+    
     $id_vehicle = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)); // intval : transform la donnée en entier (sécurité)
-    $vehicle = Vehicle::get($id_vehicle);
-    if (!$vehicle) {
-        header('Location: /controllers/dashboard/vehicles/list-ctrl.php');
-        die;
-    }
     $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
+
+    $vehicle = Vehicle::get($id_vehicle);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Tableau d'erreurs
@@ -63,13 +60,13 @@ try {
                 $error['vehicleMileage'] = 'Le kilométrage renseigné n\'est pas valide.';
             }
         }
-        
+
         // vehicleCATEGORY
         $vehicleCategory = filter_input(INPUT_POST, 'id_category', FILTER_SANITIZE_NUMBER_INT);
         if (empty($vehicleCategory)) {
             $error['id_category'] = 'Veuillez renseigner une catégorie';
         } else {
-            $arrayCategoryIds = array_column($categories, 'id_category'); // Comparer l'id entré avec un tableau contenant tous les Id (tableu d'objet -> tableau de valeurs)
+            $arrayCategoryIds = array_column($categories, 'id_category'); // Comparer l'id entré avec un tableau contenant tous les Id (tableau d'objet -> tableau de valeurs)
             $isOk = filter_var($vehicleCategory, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
             if (!$isOk || !in_array($vehicleCategory, $arrayCategoryIds)) {
                 $error['id_category'] = 'La catégorie renseignée n\'est pas valide.';
@@ -78,7 +75,10 @@ try {
 
         // vehiclePICTURE
         $vehiclePicture = null;
-        if (!empty($_FILES['vehiclePicture']['name'])) { // Photo non obligatoire
+        if (empty($_FILES['vehiclePicture']['name'])){
+            // Ajouter le nom présent en BDD
+            $vehiclePicture = $vehicle->picture;
+        } elseif (!empty($_FILES['vehiclePicture']['name'])) { // Photo non obligatoire
             try {
                 if ($_FILES['vehiclePicture']['error'] != 0) {
                     throw new Exception("Une erreur s'est produite.");
@@ -100,20 +100,21 @@ try {
                 $error['vehiclePicture'] = $th->getMessage();
             }
         }
-        
+
         // Envoi en BDD
         if (empty($error)) {
             $vehicle = new Vehicle(
-                $vehicleBrand, 
-                $vehicleModel, 
-                $vehicleRegistration, 
-                $vehicleMileage, 
-                $vehiclePicture, 
-                null, 
-                null, 
-                null, 
-                $id_vehicle, 
-                $vehicleCategory);
+                $vehicleBrand,
+                $vehicleModel,
+                $vehicleRegistration,
+                $vehicleMileage,
+                $vehiclePicture,
+                null,
+                null,
+                null,
+                $id_vehicle,
+                $vehicleCategory
+            );
 
             $result = $vehicle->update();
             // Messages
@@ -125,6 +126,15 @@ try {
         }
     }
 
+    // Création de l'obj $vehicle à partir de l'id dans l'url
+    // Déplacement de la récupération de l'objet $vehicle après la validation du formulaire. 
+    // Cela résout le problème de l'hydratation de l'objet $vehicle avec l'ID du véhicule 
+    // depuis l'URL avant d'essayer de l'utiliser dans le formulaire de mise à jour.
+    $vehicle = Vehicle::get($id_vehicle);
+    if (!$vehicle) {
+        header('Location: /controllers/dashboard/vehicles/list-ctrl.php');
+        die;
+    }
 
 } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();

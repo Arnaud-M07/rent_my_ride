@@ -79,7 +79,7 @@
                     name="id_category" 
                     id="id_category" 
                     aria-label="Floating label">
-                        <option value="" 
+                        <option value=""
                         class="listNames" 
                         disabled 
                         selected 
