@@ -1,14 +1,17 @@
+/******************************************************************/
+/************************** DASHBOARD *****************************/
+/******************************************************************/
 body{
     background-color: #F9F9F9 !important;
 }
 
-header {
+.header-dashboard {
     position: fixed;
     height: 100%;
     overflow-y: auto;
 }
 
-main {
+.main-dashboard {
     margin-left: 25%; /* Ajustez la largeur de la colonne de gauche en fonction de vos besoins */
     height: 100%;
     overflow-y: auto;
@@ -29,9 +32,6 @@ h1{
 .section-add-vehicle .listNames::first-letter{
     text-transform: capitalize;
 }
-
-
-
 
 /* Page ADD CATEGORY - ADD VEHICLE */
 .section-add-category,
@@ -98,5 +98,31 @@ align-items: center;
 
 .vehicle-img{
     height: 50px; 
+    width: 100px;
     object-fit: cover;
 }
+
+
+
+
+
+/******************************************************************/
+/************************** FRONT *********************************/
+/******************************************************************/
+
+.header{
+    background-color: #F1F1F1;
+    padding: 5px 0;
+}
+
+.navbar-brand img{
+    height: 65px;
+}
+
+.card{
+    border: 1px solid #f1f1f1 !important;
+    box-shadow: 0px 5px 10px -3px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    background-color: #FFF;
+}
+

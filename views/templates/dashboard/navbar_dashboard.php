@@ -1,13 +1,11 @@
 <div class="row g-0">
     <!-- row contenant les cols princicipales : navbar laterale + main -->
-    <header class="row col-3">
+    <header class="row col-3 header-dashboard">
         <div class="col-3 header w-100 d-flex flex-column flex-shrink-0 p-4 bg-dark text-white" >
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-                <span class="fs-4">Dashboard</span>
+            <a href="/" class="navbar-brand d-flex align-items-center justify-content-center w-100 mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <img src="/public/assets/img/Rent_My_Ride-logo-dashboard-w.png" alt="Rent My Ride logo">
             </a>
+            <!-- <span class="fs-4">Dashboard</span> -->
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
@@ -33,4 +31,4 @@
         </div>
     </header>
 
-    <main class="col-9 d-flex flex-column h-100">
+    <main class="col-9 d-flex flex-column h-100 main-dashboard">
