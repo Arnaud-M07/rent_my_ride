@@ -21,9 +21,14 @@ h1{
     font-weight: bold !important;
 }
 
-/* .nav-link.active{
-    background-color: #ee6b4b!important;
-} */
+.btn-back-home{
+    background-color: #b33637 !important;
+    color: #FFF !important;
+}
+
+.nav-link.active{
+    background-color: #b33637 !important;
+}
 
 .listNames::first-letter{
     text-transform: capitalize;

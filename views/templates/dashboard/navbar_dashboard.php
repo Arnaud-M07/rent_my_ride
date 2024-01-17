@@ -28,7 +28,7 @@
                 </li>
             </ul>
             <hr>
-            <a class="btn btn-primary" href="/controllers/front/home-ctrl.php">Quitter le dashboard</a>
+            <a class="btn btn-back-home" href="/controllers/front/home-ctrl.php"><i class="bi bi-box-arrow-left"></i> Quitter</a>
         </div>
     </header>
 
