@@ -229,6 +229,7 @@ class Vehicle{
         return $result;
     }
 
+    // ISEXIST
     public static function isExist(string $registration): bool{
         $pdo = Database::connect(); //On fait appel à la methode static connect() qui appartient à la classe Database. Elle repond un objet de type PDO.
         // Requête SQL

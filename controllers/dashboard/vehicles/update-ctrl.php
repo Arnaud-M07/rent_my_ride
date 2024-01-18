@@ -60,7 +60,7 @@ try {
             }
         }
 
-        // vehicleCATEGORY
+        // id_vehicleCATEGORY
         $id_category = filter_input(INPUT_POST, 'id_category', FILTER_SANITIZE_NUMBER_INT);
         if (empty($id_category)) {
             $error['id_category'] = 'Veuillez renseigner une catégorie';
@@ -99,7 +99,7 @@ try {
             }
         }
 
-        if ((Vehicle::isExist($vehicleRegistration)) && ($vehicleRegistration != $vehicle->registration)) { // Si la plaque existe deja en bas e && si la plaque rentrée est différente de celle présente
+        if ((Vehicle::isExist($vehicleRegistration)) && ($vehicleRegistration != $vehicle->registration)) { // Si la plaque existe deja en base && si la plaque rentrée est différente de celle présente
             $error['vehicleRegistration'] = 'L\'immatriculation existe déjà.';
         }
 

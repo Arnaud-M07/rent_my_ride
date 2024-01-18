@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../models/Vehicle.php';
 
 try {
     $title = 'Accueil';
-    $vehicles = Vehicle::getAll($nbVehicle);
+    $vehicles = Vehicle::getAll();
 
 } catch(PDOException $e) {
     echo "Erreur : " . $e->getMessage();

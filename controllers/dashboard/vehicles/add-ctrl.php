@@ -99,27 +99,30 @@ try {
         }
         // Envoi en BDD
         if (empty($error)) {
-            $vehicle = new Vehicle(
-                $vehicleBrand,
-                $vehicleModel,
-                $vehicleRegistration,
-                $vehicleMileage,
-                $vehiclePicture,
-                null,
-                null,
-                null,
-                null,
-                $id_category
-            );
 
-            // Methode SET / GET (vider la construct Vehicle et rendre tous les paramètres facultatifs)
-            // $vehicle->setBrand($brand);
-            // $vehicle->setModel($model);
-            // $vehicle->setRegistration($registration);
-            // $vehicle->setMileage($mileage);
-            // $vehicle->setPicture($picture);
-            // $vehicle->setIdCategory(intval($category));
-            // ...
+            $vehicle = new Vehicle();
+            // Methode __construct
+                // $vehicle = new Vehicle(
+                //     $vehicleBrand,
+                //     $vehicleModel,
+                //     $vehicleRegistration,
+                //     $vehicleMileage,
+                //     $vehiclePicture,
+                //     null,
+                //     null,
+                //     null,
+                //     null,
+                //     $id_category
+                // );
+
+            // Methode SET / GET
+            $vehicle->setBrand($vehicleBrand);
+            $vehicle->setModel($vehicleModel);
+            $vehicle->setRegistration($vehicleRegistration);
+            $vehicle->setMileage($vehicleMileage);
+            $vehicle->setPicture($vehiclePicture);
+            $vehicle->setIdCategory(intval($id_category));
+
             $result = $vehicle->insert();
             // Messages
             if ($result) {
