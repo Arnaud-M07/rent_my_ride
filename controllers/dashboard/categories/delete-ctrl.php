@@ -2,10 +2,11 @@
 session_start(); // Passage de la donnée $msg via la session
 
 require_once __DIR__ . '/../../../models/Category.php';
-require_once __DIR__ . '/../../../config/const.php';
+
 
 try {
-    $id_category = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+    // Récupération du paramètre d'URL correspondant à l'id de la catégorie cliquée
+    $id_category = intval(filter_input(INPUT_GET, 'id_category', FILTER_SANITIZE_NUMBER_INT));
     // $category = Category::get($id_category);
 
     $isDeleted = Category::delete($id_category);

@@ -9,19 +9,18 @@
                     <i class="bi bi-arrow-left-circle"></i> Retour à la liste des catégories
                 </a>
             </div>
-            
         </div>
         <form action="" method="POST" class="form" novalidate>
             <div class="row">
                 <div class="col">
                     <label for="categoryName" class="form-label">Nouveau nom de la catégorie :</label>
-                    <input pattern="<?=REGEX_CATEGORY?>" 
-                    value="<?= $category->name ?>" 
-                    name="categoryName" 
-                    type="text" 
-                    class="form-control" 
+                    <input pattern="<?=REGEX_CATEGORY?>"
+                    value="<?= $category->name ?>"
+                    name="categoryName"
+                    type="text"
+                    class="form-control"
                     placeholder="<?= $category->name ?? $categoryName ?>"
-                    id="categoryName" 
+                    id="categoryName"
                     required >
                     <small class="alert-message"><?= $error['categoryName'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDB['categoryName'] ?? '' ?></small>

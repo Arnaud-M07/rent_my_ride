@@ -3,8 +3,9 @@ require_once __DIR__ . '/Category.php';
 require_once __DIR__ . '/../config/const.php';
 require_once __DIR__ . '/../helpers/Database.php';
 
-class Vehicle{
-
+class Vehicle
+{
+    // ATTRIBUTS
     private ?int $id_vehicle;
     private string $brand;
     private string $model;
@@ -16,31 +17,24 @@ class Vehicle{
     private ?string $deleted_at;
     private ?int $id_category;
 
-    // Méthode magique construct
-    public function __construct(
-        string $brand = '',
-        string $model = '',
-        string $registration = '',
-        int $mileage = 0,
-        string $picture = null,
-        string $created_at = null,
-        string $updated_at = null,
-        string $deleted_at = null,
-        int $id_vehicle = null,
-        int $id_category = null) {
 
-            $this->id_category = $id_category;
-            $this->id_vehicle = $id_vehicle;
-            $this->brand = $brand;
-            $this->model = $model;
-            $this->registration = $registration;
-            $this->mileage = $mileage;
-            $this->picture = $picture;
-            $this->created_at = $created_at;
-            $this->updated_at = $updated_at;
-            $this->deleted_at = $deleted_at;
-        }
+    // METHODE CONSTRUCT
+    public function __construct(string $brand = '', string $model = '', string $registration = '', int $mileage = 0, string $picture = null, string $created_at = null, string $updated_at = null, string $deleted_at = null, int $id_vehicle = null, int $id_category = null)
+    {
+        $this->id_category = $id_category;
+        $this->id_vehicle = $id_vehicle;
+        $this->brand = $brand;
+        $this->model = $model;
+        $this->registration = $registration;
+        $this->mileage = $mileage;
+        $this->picture = $picture;
+        $this->created_at = $created_at;
+        $this->updated_at = $updated_at;
+        $this->deleted_at = $deleted_at;
+    }
 
+
+    // METHODE SETTERS / GETERS
     // $id_vehicles
     public function setIdVehicle(?int $id_vehicle){
         $this->id_vehicle = $id_vehicle;
@@ -121,11 +115,15 @@ class Vehicle{
         return $this->id_category;
     }
 
-    // INSERT BDD
-    public function insert(): bool{
-        // Connexion BDD et envoi
+
+
+    // INSERT
+    // MÉTHODE PERMETTANT L'ENREGISTREMENT D'UN NOUVEAU VÉHICULE
+    public function insert(): bool
+    {
+        // Création d'une variable recevant un objet issu de la classe PDO
         $pdo = Database::connect();
-        // Requête d'insertion
+        // Requête contenant des marqueurs nominatifs
         $sql = "INSERT INTO `vehicles`(`brand`, `model`, `registration`, `mileage`, `picture`, `id_category`)
                 VALUES(:vehicleBrand,
                 :vehicleModel,
@@ -133,16 +131,16 @@ class Vehicle{
                 :vehicleMileage,
                 :vehiclePicture,
                 :id_category);";
-
-        // Préparation de la requête
-        $sth = $pdo->prepare($sql); //prepare() = permet d'eviter les injections SQL / sth = statement handle
+        // Si marqueur nominatif, il faut préparer la requête //prepare() = permet d'eviter les injections SQL / sth = statement handle
+        $sth = $pdo->prepare($sql);
+        // Affectation des valeurs correspondantes aux marqueurs nominatifs concernés
         $sth->bindValue(':vehicleBrand', $this->getBrand());
         $sth->bindValue(':vehicleModel', $this->getModel());
         $sth->bindValue(':vehicleRegistration', $this->getRegistration());
         $sth->bindValue(':vehicleMileage', $this->getMileage(), PDO::PARAM_INT);
         $sth->bindValue(':vehiclePicture', $this->getPicture());
         $sth->bindValue(':id_category', $this->getIdCategory(), PDO::PARAM_INT);
-        // 4 Possibilités égales :
+        // 4 Possibilités d'éxecution :
         // *1
         $result = $sth->execute();
         return $result;
@@ -155,15 +153,18 @@ class Vehicle{
         // return (bool) $sth->rowCount();
     }
 
-    // GETALL
-    public static function getAll(): array|false {
-        // Connexion BDD et récupération
-        $pdo = Database::connect();
 
+
+    // GETALL
+    // MÉTHODE PERMETTANT DE RÉCUPÉRER LA LISTE DE VÉHCULES SOUS FORME DE TABLEAU D'OBJET
+    public static function getAll(): array|false
+    {
+        $pdo = Database::connect();
+        // Ajout du nom de la catégorie dans la class Vehicles / Liaison de la clé primaire à la clé trangère.
         $sql = 'SELECT *, `categories`.`name` AS `categoryName`
                 FROM `vehicles`
-                INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`'; // Ajout du nom de la catégorie dans la class Vehicles / Liaison de la clé primaire à la clé trangère.
-                // ... ORDER BY`categories`.`name`
+                INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`';
+        // ... ORDER BY`categories`.`name`
         $sth = $pdo->query($sql); // Prepare et execute
         $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
 
@@ -172,7 +173,8 @@ class Vehicle{
 
     // GET
     // Récupère toutes les colonnes de la table 'vehicles' en fonction de l'id du véhicule
-    public static function get(int $id): object | false {
+    public static function get(int $id): object | false
+    {
         $pdo = Database::connect();
         $sql = 'SELECT *
                 FROM `vehicles`
@@ -188,7 +190,8 @@ class Vehicle{
 
     // UPDATE
     // Modifier le nom du véhicule selon l'ID passé en URL
-    public function update(){
+    public function update()
+    {
         // Connexion BDD
         $pdo = Database::connect();
         // Requête SQL de sélection dans la table 'vehicles'
@@ -216,7 +219,8 @@ class Vehicle{
 
     // DELETE
     // Supprimer une entrée dans une table
-    public static function delete(int $id){
+    public static function delete(int $id)
+    {
         $pdo = Database::connect();
         // Requête SQL
         $sql = "DELETE FROM `vehicles`
@@ -230,7 +234,8 @@ class Vehicle{
     }
 
     // ISEXIST
-    public static function isExist(string $registration): bool{
+    public static function isExist(string $registration): bool
+    {
         $pdo = Database::connect(); //On fait appel à la methode static connect() qui appartient à la classe Database. Elle repond un objet de type PDO.
         // Requête SQL
         $sql = 'SELECT COUNT(`id_vehicle`) AS `nbcolumn`
@@ -245,5 +250,4 @@ class Vehicle{
         return ($result > 0); // Si c'est suppérieur à 0 alors c'est TRUE
 
     }
-
 }

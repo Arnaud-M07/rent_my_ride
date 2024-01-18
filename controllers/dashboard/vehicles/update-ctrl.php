@@ -8,7 +8,7 @@ try {
     $page = 'vehicles';
 
     $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
-    $id_vehicle = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)); // intval : transform la donnée en entier (sécurité)
+    $id_vehicle = intval(filter_input(INPUT_GET, 'id_vehicle', FILTER_SANITIZE_NUMBER_INT)); // intval : transform la donnée en entier (sécurité)
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $vehicle = Vehicle::get($id_vehicle);

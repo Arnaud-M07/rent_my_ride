@@ -118,13 +118,13 @@ class Category
 
     // DELETE
     // MÉTHODE PERMETTANT LA SUPPRESSION D'UNE CATÉGORIE
-    public static function delete(int $id)
+    public static function delete(int $id_category)
     {
         $pdo = Database::connect();
         $sql = "DELETE FROM `categories`
                 WHERE `id_category` = :id_category";
         $sth = $pdo->prepare($sql);
-        $sth->bindValue(':id_category', $id, PDO::PARAM_INT);
+        $sth->bindValue(':id_category', $id_category, PDO::PARAM_INT);
         $result = $sth->execute();
         return $result;
     }
