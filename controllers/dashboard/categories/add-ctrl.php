@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../../config/const.php';
 require_once __DIR__ . '/../../../models/Category.php';
 
 try {
@@ -7,11 +6,11 @@ try {
     $page = 'categories';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        
+
         $error = [];
         $addedToDb = [];
 
-        // Nettoyage de la donnée
+        // Récupération, nettoyage et validation des données
         $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_SPECIAL_CHARS);
         if (empty($categoryName)) {
             $error['categoryName'] = 'Veuillez renseigner une catégorie à ajouter.';
@@ -23,13 +22,18 @@ try {
         }
 
         // Vérifie si la catégorie existe
-        if (Category::isExist($categoryName)) {
-            $error['categoryName'] = 'La catégorie existe déjà.';
+        $isExist = Category::isExist($categoryName);
+        if($isExist){
+            $error['name'] = 'Cette catégorie existe déjà!';
         }
 
-        // Envoi en BDD
+        // Enregistrement en BDD
         if (empty($error)) {
-            $category = new Category($categoryName);
+            // Création d'un nouvel objet issu de la classe 'category'
+            $category = new Category();
+            // Hydratation de notre objet
+            $category->setName($categoryName);
+            // Appel de la méthode insert
             $result = $category->insert();
 
             // Messages
@@ -39,7 +43,7 @@ try {
                 $error['categoryName'] = 'Erreur de serveur : la donnée n\'a pas été insérée';
             }
         }
-        
+
     }
 } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();

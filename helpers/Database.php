@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/../config/const.php';
 
 // Connexion à la BDD
