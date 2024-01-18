@@ -6,12 +6,12 @@ require_once __DIR__ . "/../../../models/Vehicle.php";
 try {
     $title = 'Modifier un véhicule';
     $page = 'vehicles';
-    
-    $id_vehicle = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)); // intval : transform la donnée en entier (sécurité)
+
     $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
-    $vehicle = Vehicle::get($id_vehicle);
+    $id_vehicle = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)); // intval : transform la donnée en entier (sécurité)
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $vehicle = Vehicle::get($id_vehicle);
         // Tableau d'erreurs
         $error = [];
         $addedToDb = [];
@@ -61,13 +61,13 @@ try {
         }
 
         // vehicleCATEGORY
-        $vehicleCategory = filter_input(INPUT_POST, 'id_category', FILTER_SANITIZE_NUMBER_INT);
-        if (empty($vehicleCategory)) {
+        $id_category = filter_input(INPUT_POST, 'id_category', FILTER_SANITIZE_NUMBER_INT);
+        if (empty($id_category)) {
             $error['id_category'] = 'Veuillez renseigner une catégorie';
         } else {
             $arrayCategoryIds = array_column($categories, 'id_category'); // Comparer l'id entré avec un tableau contenant tous les Id (tableau d'objet -> tableau de valeurs)
-            $isOk = filter_var($vehicleCategory, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
-            if (!$isOk || !in_array($vehicleCategory, $arrayCategoryIds)) {
+            $isOk = filter_var($id_category, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_CATEGORY . '/')));
+            if (!$isOk || !in_array($id_category, $arrayCategoryIds)) {
                 $error['id_category'] = 'La catégorie renseignée n\'est pas valide.';
             }
         }
@@ -76,6 +76,7 @@ try {
         $vehiclePicture = $vehicle->picture ?? null;
         if (!empty($_FILES['vehiclePicture']['name'])) { // Photo non obligatoire
             try {
+                @unlink(__DIR__ . '/../../../public/uploads/vehicles/' . $filename . '.' . $extension); // Suppresssion de l'image en base
                 if ($_FILES['vehiclePicture']['error'] != 0) {
                     throw new Exception("Une erreur s'est produite.");
                 }
@@ -92,14 +93,19 @@ try {
                 $to = __DIR__ . '/../../../public/uploads/vehicles/' . $filename . '.' . $extension;
                 $vehiclePicture = $filename . '.' . $extension;
                 move_uploaded_file($from, $to);
-                
+
             } catch (\Throwable $th) {
                 $error['vehiclePicture'] = $th->getMessage();
             }
         }
 
+        if ((Vehicle::isExist($vehicleRegistration)) && ($vehicleRegistration != $vehicle->registration)) { // Si la plaque existe deja en bas e && si la plaque rentrée est différente de celle présente
+            $error['vehicleRegistration'] = 'L\'immatriculation existe déjà.';
+        }
+
         // Envoi en BDD
         if (empty($error)) {
+
             $vehicle = new Vehicle(
                 $vehicleBrand,
                 $vehicleModel,
@@ -110,10 +116,10 @@ try {
                 null,
                 null,
                 $id_vehicle,
-                $vehicleCategory
+                $id_category
             );
-
             $result = $vehicle->update();
+
             // Messages
             if ($result) {
                 $addedToDb['addVehicle'] = "Entrée modifiée dans la table 'vehicles'";
@@ -122,10 +128,9 @@ try {
             }
         }
     }
-
     // Création de l'obj $vehicle à partir de l'id dans l'url
-    // Déplacement de la récupération de l'objet $vehicle après la validation du formulaire. 
-    // Cela résout le problème de l'hydratation de l'objet $vehicle avec l'ID du véhicule 
+    // Déplacement de la récupération de l'objet $vehicle après la validation du formulaire.
+    // Cela résout le problème de l'hydratation de l'objet $vehicle avec l'ID du véhicule
     // depuis l'URL avant d'essayer de l'utiliser dans le formulaire de mise à jour.
     $vehicle = Vehicle::get($id_vehicle);
     if (!$vehicle) {

@@ -18,8 +18,6 @@
                                 <li><span class="fw-bold">Immatriculation :</span> <br><?= $vehicle->registration ?></li>
                                 <li><span class="fw-bold">Kilométrage :</span> <br><?= $vehicle->mileage ?></li>
                             </ul>
-                            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                            <!-- <a href="#" class="btn btn-dark">En savoir plus</a> -->
                         </div>
                     </div>
                 </div>

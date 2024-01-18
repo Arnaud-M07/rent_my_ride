@@ -127,11 +127,11 @@ class Vehicle{
         $pdo = Database::connect();
         // Requête d'insertion
         $sql = "INSERT INTO `vehicles`(`brand`, `model`, `registration`, `mileage`, `picture`, `id_category`)
-                VALUES(:vehicleBrand, 
-                :vehicleModel, 
-                :vehicleRegistration, 
-                :vehicleMileage, 
-                :vehiclePicture, 
+                VALUES(:vehicleBrand,
+                :vehicleModel,
+                :vehicleRegistration,
+                :vehicleMileage,
+                :vehiclePicture,
                 :id_category);";
 
         // Préparation de la requête
@@ -142,7 +142,7 @@ class Vehicle{
         $sth->bindValue(':vehicleMileage', $this->getMileage(), PDO::PARAM_INT);
         $sth->bindValue(':vehiclePicture', $this->getPicture());
         $sth->bindValue(':id_category', $this->getIdCategory(), PDO::PARAM_INT);
-        // 4 Possibilités égales : 
+        // 4 Possibilités égales :
         // *1
         $result = $sth->execute();
         return $result;
@@ -157,12 +157,13 @@ class Vehicle{
 
     // GETALL
     public static function getAll(): array|false {
-        // Connexion BDD et récupération 
+        // Connexion BDD et récupération
         $pdo = Database::connect();
+
         $sql = 'SELECT *, `categories`.`name` AS `categoryName`
                 FROM `vehicles`
                 INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`'; // Ajout du nom de la catégorie dans la class Vehicles / Liaison de la clé primaire à la clé trangère.
-                // ... ORDER BY`categories`.`name` 
+                // ... ORDER BY`categories`.`name`
         $sth = $pdo->query($sql); // Prepare et execute
         $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
 
@@ -181,7 +182,7 @@ class Vehicle{
         $sth->bindValue(':id_vehicle', $id, PDO::PARAM_INT);
         $sth->execute();
         $result = $sth->fetch(PDO::FETCH_OBJ); // Va chercher la table et la retourne sous forme d'objet
-        
+
         return $result;
     }
 
@@ -204,7 +205,7 @@ class Vehicle{
         $sth->bindValue(':vehicleBrand', $this->getBrand());
         $sth->bindValue(':vehicleModel', $this->getModel());
         $sth->bindValue(':vehicleRegistration', $this->getRegistration());
-        $sth->bindValue(':vehicleMileage', $this->getMileage());
+        $sth->bindValue(':vehicleMileage', $this->getMileage(), PDO::PARAM_INT);
         $sth->bindValue(':vehiclePicture', $this->getPicture());
         $sth->bindValue(':id_category', $this->getIdCategory(), PDO::PARAM_INT); // Récupération de l'id passé en URL
         $sth->bindValue(':id_vehicle', $this->getIdVehicle(), PDO::PARAM_INT);
@@ -226,6 +227,22 @@ class Vehicle{
         $result = $sth->execute();
 
         return $result;
+    }
+
+    public static function isExist(string $registration): bool{
+        $pdo = Database::connect(); //On fait appel à la methode static connect() qui appartient à la classe Database. Elle repond un objet de type PDO.
+        // Requête SQL
+        $sql = 'SELECT COUNT(`id_vehicle`) AS `nbcolumn`
+                FROM `vehicles`
+                WHERE `registration` = :registration';
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':registration', $registration);
+        $sth->execute();
+        $result = $sth->fetchColumn();
+
+        return ($result > 0); // Si c'est suppérieur à 0 alors c'est TRUE
+
     }
 
 }

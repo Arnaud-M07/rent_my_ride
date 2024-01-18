@@ -25,7 +25,7 @@ try {
                 $error['vehicleBrand'] = 'La marque renseignée n\'est pas valide.';
             }
         }
-        
+
         // vehicleModel INPUT
         $vehicleModel = filter_input(INPUT_POST, 'vehicleModel', FILTER_SANITIZE_SPECIAL_CHARS);
         if (empty($vehicleModel)) {
@@ -60,14 +60,14 @@ try {
         }
 
         // vehicleCATEGORY
-        $vehicleCategory = filter_input(INPUT_POST, 'id_category', FILTER_SANITIZE_NUMBER_INT);
-        if (empty($vehicleCategory)) {
+        $id_category = filter_input(INPUT_POST, 'id_category', FILTER_SANITIZE_NUMBER_INT);
+        if (empty($id_category)) {
             $error['id_category'] = 'Veuillez renseigner une catégorie';
         } else {
             $arrayCategoryIds = array_column($categories, 'id_category'); // Comparer l'id entré avec un tableau contenant tous les Id (tableu d'objet -> tableau de valeurs)
-            
-            $isOk = filter_var($vehicleCategory, FILTER_VALIDATE_INT);
-            if (!$isOk || !in_array($vehicleCategory, $arrayCategoryIds)) {
+
+            $isOk = filter_var($id_category, FILTER_VALIDATE_INT);
+            if (!$isOk || !in_array($id_category, $arrayCategoryIds)) {
                 $error['id_category'] = 'La catégorie renseignée n\'est pas valide.';
             }
         }
@@ -109,7 +109,7 @@ try {
                 null,
                 null,
                 null,
-                $vehicleCategory
+                $id_category
             );
 
             // Methode SET / GET (vider la construct Vehicle et rendre tous les paramètres facultatifs)

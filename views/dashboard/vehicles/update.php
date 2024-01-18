@@ -47,10 +47,10 @@
                 <!-- vehicleCategory -->
                 <div class="col col-md-6">
                     <label for="id_category">Catégorie du véhicule</label>
-                    <select class="form-select listNames" 
-                    value="" 
-                    name="id_category" 
-                    id="id_category" 
+                    <select class="form-select listNames"
+                    value=""
+                    name="id_category"
+                    id="id_category"
                     aria-label="Floating label select example">
                         <?php foreach ($categories as $category) { ?>
                             <option class="listNames" value="<?= $category->id_category ?>" <?= ($category->id_category == $vehicle->id_category) ? 'selected' : '' ?>>
@@ -64,9 +64,10 @@
                 <!-- vehiclePicture -->
                 <div class="col col-md-6">
                     <label for="vehiclePicture" class="form-label mb-0">Photo du véhicule</label>
-                    <input class="form-control" name="vehiclePicture" id="vehiclePicture" type="file" accept=".png, image/jpeg">
+                    <input class="form-control" name="vehiclePicture" id="vehiclePicture" type="file" accept="image/png, image/jpeg">
                     <small class="alert-message"><?= $error['vehiclePicture'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['vehiclePicture'] ?? '' ?></small>
+                    <img src='/public/uploads/vehicles/<?= $vehicle->picture ?>' class="vehicle-img mt-1 rounded" alt='Image du véhicule'>
                 </div>
                 <small class="alert-message"><?= $error['addVehicle'] ?? '' ?></small>
                 <small class="addToBdd-message"><?= $addedToDb['addVehicle'] ?? '' ?></small>
