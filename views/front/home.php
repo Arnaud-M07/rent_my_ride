@@ -1,11 +1,17 @@
 <section class="section5 section-destinations">
     <!-- <div class="container-fluid hero-banner"></div> -->
-    <div class="container py-5">
-        <div class="row my-5">
-            <h1>Liste des véhicules</h1>
+    <div class="container">
+        <div class="row py-5 g-4">
+            <div class="col">
+                <div class="hero-banner">
+                    <div class="filter">
+                        <h1 class="">Nos<br> véhicules</h1>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- 1st Row -->
-        <div class="row g-4">
+        <div class="row g-4 pb-5 mb-5">
             <!-- Card 1-->
             <?php foreach ($vehicles as $vehicle) { ?>
                 <div class="col col-12 col-md-6 col-lg-3">
