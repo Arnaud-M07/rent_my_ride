@@ -15,8 +15,8 @@
                         <div class="card-body">
                             <h5 class="card-title fw-bold"><?=$vehicle->brand .' '. $vehicle->model?></h5>
                             <ul>
-                                <li><span class="fw-bold">Immatriculation :</span> <br><?= $vehicle->registration ?></li>
-                                <li><span class="fw-bold">Kilométrage :</span> <br><?= $vehicle->mileage ?></li>
+                                <li><span class="fw-bold">Immatriculation :</span> <br><span class="fst-italic"><?= $vehicle->registration ?></span></li>
+                                <li><span class="fw-bold">Kilométrage :</span> <br><span class="fst-italic"><?= $vehicle->mileage ?></span></li>
                             </ul>
                         </div>
                     </div>

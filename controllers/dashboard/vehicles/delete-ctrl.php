@@ -7,7 +7,7 @@ require_once __DIR__ . "/../../../config/const.php";
 try {
     $id_vehicle = intval(filter_input(INPUT_GET, 'id_vehicle', FILTER_SANITIZE_NUMBER_INT));
 
-    $isDeleted = Vehicle::delete($id_vehicle);
+    $isDeleted = Vehicle::archive($id_vehicle);
 
     if ($isDeleted) {
         $msg = 'Le véhicule a été supprimé';

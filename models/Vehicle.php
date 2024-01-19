@@ -163,7 +163,8 @@ class Vehicle
         // Ajout du nom de la catégorie dans la class Vehicles / Liaison de la clé primaire à la clé trangère.
         $sql = 'SELECT *, `categories`.`name` AS `categoryName`
                 FROM `vehicles`
-                INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`';
+                INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`
+                WHERE `vehicles`.`deleted_at` IS NULL;';
         // ... ORDER BY`categories`.`name`
         $sth = $pdo->query($sql); // Prepare et execute
         $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
@@ -212,6 +213,21 @@ class Vehicle
         $sth->bindValue(':vehiclePicture', $this->getPicture());
         $sth->bindValue(':id_category', $this->getIdCategory(), PDO::PARAM_INT); // Récupération de l'id passé en URL
         $sth->bindValue(':id_vehicle', $this->getIdVehicle(), PDO::PARAM_INT);
+        $result = $sth->execute();
+
+        return $result;
+    }
+
+    // Faire une méthode Archive ajoutant le timestamp dans la colonne deleted_at.
+    // Si deleted_at, ne pas récupérer dans le getAll.
+    public static function archive(int $id){
+        $pdo = Database::connect();
+        $sql = "UPDATE `vehicles`
+            SET `deleted_at` = NOW()
+            WHERE `id_vehicle` = :id_vehicle";
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_vehicle', $id, PDO::PARAM_INT);
         $result = $sth->execute();
 
         return $result;

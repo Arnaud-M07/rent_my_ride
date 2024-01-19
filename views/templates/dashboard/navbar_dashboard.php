@@ -22,13 +22,13 @@
                 </li>
                 <li>
                     <a href="#" class="nav-link text-white">
-                        <i class="bi bi-calendar3"></i> 
+                        <i class="bi bi-calendar3"></i>
                         Réservations
                     </a>
                 </li>
             </ul>
             <hr>
-            <a class="btn btn-back-home" href="/controllers/front/home-ctrl.php"><i class="bi bi-box-arrow-left"></i> Quitter</a>
+            <a class="btn btn-back-home" href="/controllers/vehicles-list-ctrl.php"><i class="bi bi-box-arrow-left"></i> Quitter</a>
         </div>
     </header>
 
