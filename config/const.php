@@ -5,6 +5,7 @@ define('REGEX_REGISTRATION','^[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}$');
 define('REGEX_MILEAGE', '^[0-9]{0,6}$');
 define('ARRAY_TYPES', ['image/jpeg', 'image/png']);
 define('UPLOAD_MAX_SIZE', 2*1024*1024);
+define('LIMIT', 4);
 
 
 // BDD

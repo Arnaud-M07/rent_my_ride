@@ -177,6 +177,38 @@ class Vehicle
         return $result;
     }
 
+
+    public static function getAllPaginate(int $offset): array|false{
+        $pdo = Database::connect();
+
+        $sql = 'SELECT *
+            FROM `vehicles`
+            INNER JOIN `categories`
+            ON `categories`.`id_category` = `vehicles`.`id_category`
+            LIMIT '.LIMIT.' OFFSET :offset;';
+
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $sth->execute();
+        $result = $sth->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
+
+    public static function countVehicles(): int{
+        $pdo = Database::connect();
+
+        $sql = 'SELECT COUNT(`id_category`)
+                FROM `vehicles`;';
+        $sth = $pdo->query($sql);
+        $result = $sth->fetchColumn();
+
+        return $result;
+    }
+
+
+
     // GET
     // Récupère toutes les colonnes de la table 'vehicles' en fonction de l'id du véhicule
     public static function get(int $id): object | false
