@@ -10,6 +10,17 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-3 mb-3">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Catégorie</option>
+                    <option value="1">Voiture</option>
+                    <option value="2">Avion de chasse</option>
+                    <option value="3">Van</option>
+                    <option value="3">F1</option>
+                </select>
+            </div>
+        </div>
         <!-- 1st Row -->
         <div class="row g-4 mb-5">
             <!-- Card 1-->
@@ -35,7 +46,7 @@
                     <li class="page-item disabled">
                         <a class="page-link">Previous</a>
                     </li>
-                    <?php for ($page=1; $page <= $nbPages; $page++) { ?>
+                    <?php for ($page = 1; $page <= $nbPages; $page++) { ?>
                         <li class="page-item"><a class="page-link" href='/controllers/vehicles-list-ctrl.php?currentPage=<?= $page ?>'><?= $page ?></a></li>
                     <?php } ?>
                     <li class="page-item">

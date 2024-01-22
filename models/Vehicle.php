@@ -177,16 +177,14 @@ class Vehicle
         return $result;
     }
 
-
+    // Récupérer la liste des véhicules par lots
     public static function getAllPaginate(int $offset): array|false{
         $pdo = Database::connect();
-
         $sql = 'SELECT *
             FROM `vehicles`
             INNER JOIN `categories`
             ON `categories`.`id_category` = `vehicles`.`id_category`
             LIMIT '.LIMIT.' OFFSET :offset;';
-
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':offset', $offset, PDO::PARAM_INT);
         $sth->execute();
