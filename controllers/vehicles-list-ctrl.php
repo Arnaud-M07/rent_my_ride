@@ -6,27 +6,19 @@ try {
     $title = 'Accueil';
     // Récupérer l'id de la page actuelle
     $currentPage = intval(filter_input(INPUT_GET, 'currentPage', FILTER_SANITIZE_NUMBER_INT));
-
-    // On détermine sur quelle page on se trouve
-    // Methode 1
-    // if(isset($_GET['currentPage']) && !empty($_GET['currentPage'])){
-    //     $currentPage = ($_GET['currentPage']);
-    // }else{
-    //     $currentPage = 1;
-    // }
-    // Methode 2
     if(!isset($_GET['currentPage'])){
         $currentPage = 1;
     }
 
-    // Définir le calcul de l'offset
-    $offset = LIMIT * ($currentPage - 1 );
     // Définir la pagination
     // Compter le nombre de véhicule
     $nbVehicles = Vehicle::countVehicles();
     // Diviser le nbre de véhicule par le nombre de véhicules à afficher par page pour obtenir le nombre de pages
     $nbPages = ceil($nbVehicles / LIMIT);
 
+    // Définir le calcul de l'offset
+    $offset = LIMIT * ($currentPage - 1 );
+    // Appel de tous les elements à partir de l'offset
     $vehicles = Vehicle::getAllPaginate($offset);
 
 } catch(PDOException $e) {

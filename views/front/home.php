@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3 mb-3">
+            <div class="col-3 mb-5">
                 <select class="form-select" aria-label="Default select example">
                     <option selected>Catégorie</option>
                     <option value="1">Voiture</option>

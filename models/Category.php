@@ -131,6 +131,7 @@ class Category
 
 
 
+    // ISEXIST
     // MÉTHODE PERMETTANT DE SAVOIR SI UNE CATÉGORIE EXISTE DÉJÀ OU NON
     public static function isExist(string $categoryName): bool
     {

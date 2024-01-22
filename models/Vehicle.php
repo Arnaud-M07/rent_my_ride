@@ -177,6 +177,7 @@ class Vehicle
         return $result;
     }
 
+
     // Récupérer la liste des véhicules par lots
     public static function getAllPaginate(int $offset): array|false{
         $pdo = Database::connect();
@@ -185,6 +186,8 @@ class Vehicle
             INNER JOIN `categories`
             ON `categories`.`id_category` = `vehicles`.`id_category`
             LIMIT '.LIMIT.' OFFSET :offset;';
+            // LIMIT : limit the number of rows returned
+            // OFFSET : skip a specific number of rows
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':offset', $offset, PDO::PARAM_INT);
         $sth->execute();
@@ -194,10 +197,12 @@ class Vehicle
     }
 
 
+
+    // COUNT VEHICLES
     public static function countVehicles(): int{
         $pdo = Database::connect();
 
-        $sql = 'SELECT COUNT(`id_category`)
+        $sql = 'SELECT COUNT(`id_vehicle`)
                 FROM `vehicles`;';
         $sth = $pdo->query($sql);
         $result = $sth->fetchColumn();
@@ -223,6 +228,8 @@ class Vehicle
 
         return $result;
     }
+
+
 
     // UPDATE
     // Modifier le nom du véhicule selon l'ID passé en URL
@@ -253,6 +260,8 @@ class Vehicle
         return $result;
     }
 
+
+
     // Faire une méthode Archive ajoutant le timestamp dans la colonne deleted_at.
     // Si deleted_at, ne pas récupérer dans le getAll.
     public static function archive(int $id): bool
@@ -279,6 +288,8 @@ class Vehicle
         return $result;
     }
 
+
+
     // DELETE
     // Supprimer une entrée dans une table
     public static function delete(int $id): bool
@@ -294,6 +305,8 @@ class Vehicle
 
         return $result;
     }
+
+
 
     // ISEXIST
     public static function isExist(string $registration): bool
