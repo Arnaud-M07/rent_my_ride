@@ -8,14 +8,12 @@ try {
 
     $id_vehicle = intval(filter_input(INPUT_GET, 'id_vehicle', FILTER_SANITIZE_NUMBER_INT));
 
-    $isDeleted = Vehicle::delete($id_vehicle);
+    $isDeleted = Vehicle::archive($id_vehicle);
 
     if ($isDeleted) {
-        $path = __DIR__ . "/../../../public/uploads/vehicles/$vehicle->picture";
-        @unlink($path);
-        $msg = 'Le véhicule a été supprimé.';
+        $msg = 'Le véhicule a été archivé';
     } else {
-        $msg = 'Erreur, Le véhicule n\'a pas été supprimé.';
+        $msg = 'Erreur, Le véhicule n\'a pas été désarchivé';
     }
     $_SESSION['msg'] = $msg;
     // Passage de la donnée par l'URL

@@ -157,14 +157,19 @@ class Vehicle
 
     // GETALL
     // MÉTHODE PERMETTANT DE RÉCUPÉRER LA LISTE DE VÉHCULES SOUS FORME DE TABLEAU D'OBJET
-    public static function getAll(): array|false
+    public static function getAll(bool $isArchived = false): array|false
     {
+        if ($isArchived == false) {
+            $archive = 'IS NULL';
+        } else {
+            $archive = 'IS NOT NULL';
+        }
         $pdo = Database::connect();
         // Ajout du nom de la catégorie dans la class Vehicles / Liaison de la clé primaire à la clé trangère.
         $sql = 'SELECT *, `categories`.`name` AS `categoryName`
                 FROM `vehicles`
                 INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`
-                WHERE `vehicles`.`deleted_at` IS NULL;';
+                WHERE `vehicles`.`deleted_at` ' . $archive . ';';
         // ... ORDER BY`categories`.`name`
         $sth = $pdo->query($sql); // Prepare et execute
         $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
@@ -220,10 +225,21 @@ class Vehicle
 
     // Faire une méthode Archive ajoutant le timestamp dans la colonne deleted_at.
     // Si deleted_at, ne pas récupérer dans le getAll.
-    public static function archive(int $id){
+    public static function archive(int $id): bool
+    {
+        // Récupértion de l'id du véhicule
+        $objVehicle = self::get($id);
+        // Récupération de la valeur de la colonne deleted_at
+        $deletedAt = $objVehicle->deleted_at;
+        // Si deleted_at est NULL, alors on peut l'archiver
+        if ($deletedAt == NULL) {
+            $archive = 'NOW()';
+        } else {
+            $archive = 'NULL';
+        }
         $pdo = Database::connect();
         $sql = "UPDATE `vehicles`
-            SET `deleted_at` = NOW()
+            SET `deleted_at` = " . $archive . "
             WHERE `id_vehicle` = :id_vehicle";
 
         $sth = $pdo->prepare($sql);
@@ -235,7 +251,7 @@ class Vehicle
 
     // DELETE
     // Supprimer une entrée dans une table
-    public static function delete(int $id)
+    public static function delete(int $id): bool
     {
         $pdo = Database::connect();
         // Requête SQL

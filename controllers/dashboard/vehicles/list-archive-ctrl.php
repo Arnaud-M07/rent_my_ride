@@ -3,9 +3,9 @@ session_start();
 require_once __DIR__ . '/../../../models/Vehicle.php';
 
 try {
-    $archived = false;
+    $archived = true;
 
-    $title = 'Liste des véhicules';
+    $title = 'Liste des véhicules archivés';
     $page = 'vehicles';
     $vehicles = Vehicle::getAll($archived);
 

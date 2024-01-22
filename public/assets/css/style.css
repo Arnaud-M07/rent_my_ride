@@ -179,6 +179,10 @@ align-items: center;
     object-fit: cover;
 }
 
+.card-body{
+
+}
+
 .badge-card{
     position: absolute;
     top: 10px;
