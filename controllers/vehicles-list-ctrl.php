@@ -19,7 +19,7 @@ try {
     // Définir le calcul de l'offset
     $offset = LIMIT * ($currentPage - 1 );
     // Appel de tous les elements à partir de l'offset
-    $vehicles = Vehicle::getAllPaginate($offset);
+    $vehicles = Vehicle::getAll($offset, true, false);
 
 } catch(PDOException $e) {
     echo "Erreur : " . $e->getMessage();

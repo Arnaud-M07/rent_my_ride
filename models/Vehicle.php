@@ -155,9 +155,8 @@ class Vehicle
 
 
 
-    // GETALL
-    // MÉTHODE PERMETTANT DE RÉCUPÉRER LA LISTE DE VÉHCULES SOUS FORME DE TABLEAU D'OBJET
-    public static function getAll(bool $isArchived = false): array|false
+
+    public static function getAll(int $offset = 0, bool $paginate = false, bool $isArchived = false): array|false
     {
         if ($isArchived == false) {
             $archive = 'IS NULL';
@@ -169,29 +168,20 @@ class Vehicle
         $sql = 'SELECT *, `categories`.`name` AS `categoryName`
                 FROM `vehicles`
                 INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`
-                WHERE `vehicles`.`deleted_at` ' . $archive . ';';
-        // ... ORDER BY`categories`.`name`
-        $sth = $pdo->query($sql); // Prepare et execute
-        $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
+                WHERE `vehicles`.`deleted_at` ' . $archive ;
 
-        return $result;
-    }
+        if ($paginate) {
+            $sql .= " LIMIT " . LIMIT . " OFFSET :offset;";
+        }
 
-
-    // Récupérer la liste des véhicules par lots
-    public static function getAllPaginate(int $offset): array|false{
-        $pdo = Database::connect();
-        $sql = 'SELECT *
-            FROM `vehicles`
-            INNER JOIN `categories`
-            ON `categories`.`id_category` = `vehicles`.`id_category`
-            LIMIT '.LIMIT.' OFFSET :offset;';
-            // LIMIT : limit the number of rows returned
-            // OFFSET : skip a specific number of rows
         $sth = $pdo->prepare($sql);
-        $sth->bindValue(':offset', $offset, PDO::PARAM_INT);
+
+        if ($paginate) {
+            $sth->bindValue(':offset', $offset, PDO::PARAM_INT);
+        }
+
         $sth->execute();
-        $result = $sth->fetchAll(PDO::FETCH_OBJ);
+        $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
 
         return $result;
     }

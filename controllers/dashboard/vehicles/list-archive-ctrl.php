@@ -7,7 +7,7 @@ try {
 
     $title = 'Liste des véhicules archivés';
     $page = 'vehicles';
-    $vehicles = Vehicle::getAll($archived);
+    $vehicles = Vehicle::getAll(0, false, $archived);
 
     $msg = filter_var($_SESSION['msg'] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     if(isset($_SESSION['msg'])){
