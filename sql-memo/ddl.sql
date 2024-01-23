@@ -1,7 +1,12 @@
 CREATE DATABASE `rent_my_ride` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_general_ci';
 
-CREATE TABLE clients(
-   `id_client` INT AUTO_INCREMENT, 
+DROP TABLE IF EXISTS `rents`;
+DROP TABLE IF EXISTS `vehicles`;
+DROP TABLE IF EXISTS `categories`;
+DROP TABLE IF EXISTS `clients`;
+
+CREATE TABLE `clients`(
+   `id_clients` INT AUTO_INCREMENT,
    `lastname` VARCHAR(50)  NOT NULL,
    `firstname` VARCHAR(50)  NOT NULL,
    `email` VARCHAR(120)  NOT NULL,
@@ -11,40 +16,39 @@ CREATE TABLE clients(
    `zipcode` VARCHAR(5)  NOT NULL,
    `created_at` DATETIME NOT NULL,
    `updated_at` DATETIME NOT NULL,
-   PRIMARY KEY(id_client),
-   UNIQUE(email)
+   PRIMARY KEY(`id_clients`)
 );
 
 CREATE TABLE `categories`(
-   `id_category` INT AUTO_INCREMENT,
+   `id_categories` INT AUTO_INCREMENT,
    `name` VARCHAR(50)  NOT NULL,
-   PRIMARY KEY(`id_category`)
+   PRIMARY KEY(`id_categories`)
 );
 
 CREATE TABLE `vehicles`(
-   `id_vehicle` INT AUTO_INCREMENT,
+   `id_vehicles` INT AUTO_INCREMENT,
    `brand` VARCHAR(50)  NOT NULL,
    `model` VARCHAR(50)  NOT NULL,
    `registration` VARCHAR(10)  NOT NULL,
    `mileage` INT NOT NULL,
-   `picture` VARCHAR(50) ,
+   `picture` VARCHAR(50),
    `created_at` DATETIME NOT NULL,
    `updated_at` DATETIME NOT NULL,
    `deleted_at` DATETIME,
-   `id_category` INT NOT NULL,
-   PRIMARY KEY(`id_vehicle`),
-   FOREIGN KEY(`id_category`) REFERENCES categories(`id_category`)
+   `id_categories` INT NOT NULL,
+   PRIMARY KEY(`id_vehicles`),
+   FOREIGN KEY(`id_categories`) REFERENCES `categories`(`id_categories`)
 );
 
 CREATE TABLE `rents`(
-   `id_rent` INT AUTO_INCREMENT,
+   `id_rents` INT AUTO_INCREMENT,
    `startdate` DATETIME NOT NULL,
    `enddate` DATETIME NOT NULL,
    `created_at` DATETIME NOT NULL,
    `confirmed_at` DATETIME,
-   `id_vehicle` INT NOT NULL,
-   `id_client` INT NOT NULL,
-   PRIMARY KEY(`id_rent`),
-   FOREIGN KEY(`id_vehicle`) REFERENCES vehicles(`id_vehicle`),
-   FOREIGN KEY(`id_client`) REFERENCES clients(`id_client`)
+   `id_vehicles` INT,
+   `id_clients` INT,
+   PRIMARY KEY(`id_rents`),
+   FOREIGN KEY(`id_vehicles`) REFERENCES `vehicles`(`id_vehicles`),
+   FOREIGN KEY(`id_clients`) REFERENCES `clients`(`id_clients`)
 );

@@ -9,7 +9,6 @@ try {
     $id_vehicle = intval(filter_input(INPUT_GET, 'id_vehicle', FILTER_SANITIZE_NUMBER_INT));
 
     $isDeleted = Vehicle::delete($id_vehicle);
-
     if ($isDeleted) {
         $path = __DIR__ . "/../../../public/uploads/vehicles/$vehicle->picture";
         @unlink($path);
