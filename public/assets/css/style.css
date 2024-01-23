@@ -133,6 +133,7 @@ align-items: center;
     background-color: #F1F1F1 !important;
 }
 
+
 .bi-gear{
     font-weight: bold !important;
     font-size: 26px;
@@ -164,6 +165,31 @@ align-items: center;
     font-size: 6rem;
     line-height:6rem;
     text-shadow: 1px 2px 3px #00000050, 0 0 1rem #00000050, 0 0 1em #00000050;
+
+}
+
+
+.row-search{
+    width: 95%;
+    background-color: #ffffffad;
+    backdrop-filter: blur(8px);
+    border-radius: 50px;
+    padding: 35px 5vw;
+    display: flex;
+    align-items: center;
+    margin: 0 auto !important;
+    margin-top: -40px !important;
+    box-shadow: 0px 5px 10px -3px rgba(0,0,0,0.1);
+}
+
+.btn-search{
+    transition: .3s;
+    background-color: #b33637 !important;
+    color:#FFF !important;
+}
+
+.btn-search:hover{
+    background-color: #b33636db !important;
 
 }
 

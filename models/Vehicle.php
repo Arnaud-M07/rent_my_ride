@@ -154,9 +154,8 @@ class Vehicle
     }
 
 
-
-
-    public static function getAll(int $offset = 0, bool $paginate = false, bool $isArchived = false): array|false
+    // GETALL
+    public static function getAll(int $offset = 0, bool $paginate = false, bool $isArchived = false, int $id_category = null): array|false
     {
         if ($isArchived == false) {
             $archive = 'IS NULL';
@@ -169,33 +168,25 @@ class Vehicle
                 FROM `vehicles`
                 INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`
                 WHERE `vehicles`.`deleted_at` ' . $archive ;
-
+        // Ajoute la condition pour filtrer par catégorie si $id_category est spécifié
+        if ($id_category !== null) {
+            $sql .= ' AND `vehicles`.`id_category` = :id_category';
+        }
+        // Ajoute la condition pour paginer si $paginate est TRUE
         if ($paginate) {
-            $sql .= " LIMIT " . LIMIT . " OFFSET :offset;";
+            $sql .= " LIMIT " . NB_ELEMENT_PER_PAGE . " OFFSET :offset;";
         }
 
         $sth = $pdo->prepare($sql);
 
+        if ($id_category !== null) {
+            $sth->bindValue(':id_category', $id_category, PDO::PARAM_INT);
+        }
         if ($paginate) {
             $sth->bindValue(':offset', $offset, PDO::PARAM_INT);
         }
-
         $sth->execute();
         $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
-
-        return $result;
-    }
-
-
-
-    // COUNT VEHICLES
-    public static function countVehicles(): int{
-        $pdo = Database::connect();
-
-        $sql = 'SELECT COUNT(`id_vehicle`)
-                FROM `vehicles`;';
-        $sth = $pdo->query($sql);
-        $result = $sth->fetchColumn();
 
         return $result;
     }
@@ -218,7 +209,6 @@ class Vehicle
 
         return $result;
     }
-
 
 
     // UPDATE
@@ -250,8 +240,7 @@ class Vehicle
         return $result;
     }
 
-
-
+    // ARCHIVE
     // Faire une méthode Archive ajoutant le timestamp dans la colonne deleted_at.
     // Si deleted_at, ne pas récupérer dans le getAll.
     public static function archive(int $id): bool
@@ -277,7 +266,6 @@ class Vehicle
 
         return $result;
     }
-
 
 
     // DELETE
@@ -315,4 +303,33 @@ class Vehicle
         return ($result > 0); // Si c'est suppérieur à 0 alors c'est TRUE
 
     }
+
+
+
+    // COUNT VEHICLES
+    public static function countVehicles($id_category = null): int
+    {
+        $pdo = Database::connect();
+        $sql = 'SELECT COUNT(`id_vehicle`)
+                FROM `vehicles`';
+
+        // Ajouter la condition pour la catégorie si elle est spécifiée
+        if ($id_category !== null) {
+            $sql .= ' WHERE `id_category` = :id_category';
+        }
+
+        $sth = $pdo->prepare($sql);
+
+        // Binder la valeur de la catégorie si elle est spécifiée
+        if ($id_category !== null) {
+            $sth->bindValue(':id_category', $id_category, PDO::PARAM_INT);
+        }
+
+        $sth->execute();
+        $result = $sth->fetchColumn();
+
+        return $result;
+    }
+
+
 }
