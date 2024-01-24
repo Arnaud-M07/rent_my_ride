@@ -16,6 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Filtre de catégories : Au clic sur une catégorie, recharge automatiquement la page
-document.getElementById('id_category').addEventListener('change', function () {
-    document.getElementById('categoryForm').submit();
-});
+// document.getElementById('id_category').addEventListener('change', function () {
+//     document.getElementById('categoryForm').submit();
+// });

@@ -152,47 +152,52 @@ class Vehicle
         // *4
         // return (bool) $sth->rowCount();
     }
-
-
     // GETALL
-    public static function getAll(int $offset = 0, bool $paginate = false, bool $isArchived = false, int $id_category = null): array|false
+    public static function getAll(int $offset = 0, bool $paginate = false, bool $isArchived = false, int $id_category = 0, string $search = NULL): array|false
     {
-        if ($isArchived == false) {
-            $archive = 'IS NULL';
-        } else {
-            $archive = 'IS NOT NULL';
-        }
         $pdo = Database::connect();
         // Ajout du nom de la catégorie dans la class Vehicles / Liaison de la clé primaire à la clé trangère.
         $sql = 'SELECT *, `categories`.`name` AS `categoryName`
                 FROM `vehicles`
-                INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`
-                WHERE `vehicles`.`deleted_at` ' . $archive ;
+                INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`';
+        $sql .= ' WHERE 1 = 1';
+
+        if($isArchived){
+            $sql .= ' AND `vehicles`.`deleted_at` IS NOT NULL' ;
+        } else {
+            $sql .= ' AND `vehicles`.`deleted_at` IS NULL' ;
+        }
         // Ajoute la condition pour filtrer par catégorie si $id_category est spécifié
-        if ($id_category !== null) {
+        if ($id_category !== 0) {
             $sql .= ' AND `vehicles`.`id_category` = :id_category';
+        }
+        // SEARCH
+        if($search !== NULL){
+            $sql .= ' AND (`brand` LIKE :search OR `model` LIKE :search)';
         }
         // Ajoute la condition pour paginer si $paginate est TRUE
         if ($paginate) {
-            $sql .= " LIMIT " . NB_ELEMENT_PER_PAGE . " OFFSET :offset;";
+            $sql .= " LIMIT " . NB_ELEMENT_PER_PAGE . " OFFSET :offset";
         }
 
         $sth = $pdo->prepare($sql);
 
-        if ($id_category !== null) {
+        if ($id_category !== 0) {
             $sth->bindValue(':id_category', $id_category, PDO::PARAM_INT);
         }
         if ($paginate) {
             $sth->bindValue(':offset', $offset, PDO::PARAM_INT);
         }
+        // SEARCH
+        if($search !== NULL){
+            $sth->bindValue(':search', "%$search%");
+        }
+
         $sth->execute();
         $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
 
         return $result;
     }
-
-
-
     // GET
     // Récupère toutes les colonnes de la table 'vehicles' en fonction de l'id du véhicule
     public static function get(int $id): object | false
@@ -209,8 +214,6 @@ class Vehicle
 
         return $result;
     }
-
-
     // UPDATE
     // Modifier le nom du véhicule selon l'ID passé en URL
     public function update()
@@ -239,7 +242,6 @@ class Vehicle
 
         return $result;
     }
-
     // ARCHIVE
     // Faire une méthode Archive ajoutant le timestamp dans la colonne deleted_at.
     // Si deleted_at, ne pas récupérer dans le getAll.
@@ -266,8 +268,6 @@ class Vehicle
 
         return $result;
     }
-
-
     // DELETE
     // Supprimer une entrée dans une table
     public static function delete(int $id): bool
@@ -283,9 +283,6 @@ class Vehicle
 
         return $result;
     }
-
-
-
     // ISEXIST
     public static function isExist(string $registration): bool
     {
@@ -303,28 +300,40 @@ class Vehicle
         return ($result > 0); // Si c'est suppérieur à 0 alors c'est TRUE
 
     }
-
-
-
     // COUNT VEHICLES
-    public static function countVehicles($id_category = null): int
+    public static function countVehicles(int $id_category = 0, ?bool $isArchived = false, string $search = NULL): int
     {
         $pdo = Database::connect();
         $sql = 'SELECT COUNT(`id_vehicle`)
                 FROM `vehicles`';
+        $sql .= ' WHERE 1 = 1';
 
         // Ajouter la condition pour la catégorie si elle est spécifiée
-        if ($id_category !== null) {
-            $sql .= ' WHERE `id_category` = :id_category';
+        if ($id_category !== 0) {
+            $sql .= ' AND `id_category` = :id_category';
+        }
+        if($isArchived){
+            $sql .= ' AND `vehicles`.`deleted_at` IS NOT NULL' ;
+        } else {
+            $sql .= ' AND `vehicles`.`deleted_at` IS NULL' ;
+        }
+        // SEARCH
+        if($search !== NULL){
+            $sql .= ' AND (`brand` LIKE :search OR `model` LIKE :search)';
         }
 
         $sth = $pdo->prepare($sql);
 
         // Binder la valeur de la catégorie si elle est spécifiée
-        if ($id_category !== null) {
+        if ($id_category !== 0) {
             $sth->bindValue(':id_category', $id_category, PDO::PARAM_INT);
         }
+        // SEARCH
+        if($search !== NULL){
+            $sth->bindValue(':search', "%$search%");
+        }
 
+        // var_dump($sql);
         $sth->execute();
         $result = $sth->fetchColumn();
 
