@@ -22,8 +22,13 @@ h1{
 }
 
 .btn-back-home{
+    transition: .3s;
     background-color: #b33637 !important;
     color: #FFF !important;
+}
+
+.btn-back-home:hover{
+    background-color: #b33636db !important;
 }
 
 .nav-link.active{
@@ -34,13 +39,13 @@ h1{
     text-transform: capitalize;
 }
 
-.section-add-vehicle .listNames::first-letter{
+.section-form .listNames::first-letter{
     text-transform: capitalize;
 }
 
 /* Page ADD CATEGORY - ADD VEHICLE */
-.section-add-category,
-.section-add-vehicle{
+
+.section-form.dashboard{
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -48,8 +53,8 @@ h1{
     padding:0 5vw ;
 }
 
-.section-add-category form,
-.section-add-vehicle form{
+
+.section-form form{
     border: 1px solid #f1f1f1;
     box-shadow: 0px 5px 10px -3px rgba(0,0,0,0.1);
     border-radius: 10px;
@@ -57,16 +62,16 @@ h1{
     background-color: #FFF;
 }
 
-.section-add-category form label,
-.section-add-vehicle form label{
+
+.section-form form label{
     font-weight: bold;
 
 }
 
-.section-add-vehicle form .row{
+.section-form form .row{
     margin-bottom: 30px;
 }
-.section-add-vehicle form .row:last-child{
+.section-form form .row:last-child{
     margin-top: -30px;
 }
 
@@ -148,15 +153,8 @@ align-items: center;
     background-size: cover;
     background-position: center;
     object-fit: cover;
-}
-
-.hero-banner-listing{
     background-image: url(/public/assets/img/Best-New-Cars-For-City-Driving-In-2021-Featured-image-1568x882.jpg);
 }
-
-/* .hero-banner-detail{
-
-} */
 
 .hero-banner .filter{
     height: 100%;
@@ -223,6 +221,34 @@ align-items: center;
     text-decoration: none !important;
 }
 
+.card-buttons{
+    display: flex;
+    gap: 10px;;
+    flex-direction: column;
+    padding: 0 2vw;
+}
+
+.card-buttons .btn-info{
+    background-color: transparent;
+    color : #b33637 !important;
+    border: 1px solid #b33637 !important;
+
+}
+
+.btn-info:hover{
+    color : #FFF !important;
+    background-color: #b33636 !important;
+}
+
+/* .btn-booking{
+    transition: .3s;
+    background-color: #b33637 !important;
+    color:#FFF !important;
+}
+.card-buttons .btn-booking:hover{
+    background-color: #b33636db !important;
+} */
+
 
 .badge-card{
     position: absolute;
@@ -232,4 +258,10 @@ align-items: center;
     color: #000 !important;
     background-color: #ffffff8e;
     backdrop-filter: blur(2px);
+}
+
+.footer{
+    background-color: #F1F1F1;
+    margin-top: 150px;
+    padding-top: 25vh;
 }

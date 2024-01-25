@@ -1,4 +1,4 @@
-<div class="section-add-category">
+<div class="section-form dashboard">
     <div class="container">
         <div class="row pb-4">
             <h1>Modifier une catégorie</h1>

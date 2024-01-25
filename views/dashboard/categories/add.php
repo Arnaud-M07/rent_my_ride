@@ -1,4 +1,4 @@
-<div class="section-add-category">
+<div class="section section-form dashboard">
     <div class="container">
         <div class="row pb-4">
             <h1>Ajouter une catégorie</h1>
@@ -14,13 +14,13 @@
             <div class="row">
                 <div class="col">
                     <label for="categoryName" class="form-label">Nom de la catégorie :</label>
-                    <input pattern="<?=REGEX_CATEGORY?>" 
-                    value="<?= $categoryName ?? '' ?>" 
-                    name="categoryName" 
-                    type="text" 
-                    class="form-control" 
+                    <input pattern="<?=REGEX_CATEGORY?>"
+                    value="<?= $categoryName ?? '' ?>"
+                    name="categoryName"
+                    type="text"
+                    class="form-control"
                     placeholder="Entrez le nom d'une nouvelle catégorie "
-                    id="categoryName" 
+                    id="categoryName"
                     required>
                     <small class="alert-message"><?= $error['categoryName'] ?? '' ?></small>
                     <small class="addToBdd-message"><?= $addedToDb['categoryName'] ?? '' ?></small>
@@ -34,7 +34,3 @@
         </form>
     </div>
 </div>
-
-
-
-

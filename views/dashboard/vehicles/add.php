@@ -1,4 +1,4 @@
-<div class="section-add-vehicle">
+<div class="section section-form dashboard">
     <div class="container">
         <div class="row pb-4">
             <h1>Ajouter un véhicule</h1>
@@ -10,8 +10,8 @@
                 </a>
             </div>
         </div>
-        <form action="" method="POST" class="form" enctype="multipart/form-data" novalidate>
-            <div class="row">
+        <form action="" method="POST" enctype="multipart/form-data" novalidate>
+            <div class="row form">
                 <!-- vehicleBrand -->
                 <div class="col col-md-6">
                     <label for="vehicleBrand" class="form-label">Marque du véhicule :</label>

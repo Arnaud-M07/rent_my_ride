@@ -190,7 +190,6 @@ class Vehicle
             $sql .= " LIMIT " . NB_ELEMENT_PER_PAGE . " OFFSET :offset";
         }
 
-        // var_dump($sql);
         $sth = $pdo->prepare($sql);
 
         if ($id_category !== 0) {
@@ -275,13 +274,13 @@ class Vehicle
         $pdo = Database::connect();
         // Requête SQL de sélection dans la table 'vehicles'
         $sql = "UPDATE `vehicles`
-            SET `brand` = :vehicleBrand,
-                `model` = :vehicleModel,
-                `registration` = :vehicleRegistration,
-                `mileage` = :vehicleMileage,
-                `picture` = :vehiclePicture,
-                `id_category` = :id_category
-            WHERE `id_vehicle` = :id_vehicle";
+                SET `brand` = :vehicleBrand,
+                    `model` = :vehicleModel,
+                    `registration` = :vehicleRegistration,
+                    `mileage` = :vehicleMileage,
+                    `picture` = :vehiclePicture,
+                    `id_category` = :id_category
+                WHERE `id_vehicle` = :id_vehicle";
 
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':vehicleBrand', $this->getBrand());
