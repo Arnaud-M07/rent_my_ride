@@ -19,8 +19,17 @@ class Vehicle
 
 
     // METHODE CONSTRUCT
-    public function __construct(string $brand = '', string $model = '', string $registration = '', int $mileage = 0, string $picture = null, string $created_at = null, string $updated_at = null, string $deleted_at = null, int $id_vehicle = null, int $id_category = null)
-    {
+    public function __construct(string $brand = '',
+                                string $model = '',
+                                string $registration = '',
+                                int $mileage = 0,
+                                string $picture = null,
+                                string $created_at = null,
+                                string $updated_at = null,
+                                string $deleted_at = null,
+                                int $id_vehicle = null,
+                                int $id_category = null){
+
         $this->id_category = $id_category;
         $this->id_vehicle = $id_vehicle;
         $this->brand = $brand;
@@ -118,9 +127,9 @@ class Vehicle
 
 
     // INSERT
-    // MÉTHODE PERMETTANT L'ENREGISTREMENT D'UN NOUVEAU VÉHICULE
     public function insert(): bool
     {
+        // MÉTHODE PERMETTANT L'ENREGISTREMENT D'UN NOUVEAU VÉHICULE
         // Création d'une variable recevant un objet issu de la classe PDO
         $pdo = Database::connect();
         // Requête contenant des marqueurs nominatifs
@@ -199,9 +208,6 @@ class Vehicle
         $result = $sth->fetchAll(PDO::FETCH_OBJ); // Retourne un tableau d'objet
         return $result;
     }
-
-
-
     // COUNT VEHICLES
     public static function countVehicles(int $id_category = 0, ?bool $isArchived = false, string $search = NULL): int
     {
@@ -242,13 +248,10 @@ class Vehicle
 
         return $result;
     }
-
-
-
     // GET
-    // Récupère toutes les colonnes de la table 'vehicles' en fonction de l'id du véhicule
     public static function get(int $id): object | false
     {
+        // Récupère toutes les colonnes de la table 'vehicles' en fonction de l'id du véhicule
         $pdo = Database::connect();
         $sql = 'SELECT *
                 FROM `vehicles`
@@ -263,9 +266,9 @@ class Vehicle
         return $result;
     }
     // UPDATE
-    // Modifier le nom du véhicule selon l'ID passé en URL
     public function update()
     {
+        // Modifier le nom du véhicule selon l'ID passé en URL
         // Connexion BDD
         $pdo = Database::connect();
         // Requête SQL de sélection dans la table 'vehicles'
@@ -291,10 +294,9 @@ class Vehicle
         return $result;
     }
     // ARCHIVE
-    // Faire une méthode Archive ajoutant le timestamp dans la colonne deleted_at.
-    // Si deleted_at, ne pas récupérer dans le getAll.
     public static function archive(int $id): bool
     {
+        // Faire une méthode Archive ajoutant le timestamp dans la colonne deleted_at.
         // Récupértion de l'id du véhicule
         $objVehicle = self::get($id);
         // Récupération de la valeur de la colonne deleted_at
@@ -317,9 +319,9 @@ class Vehicle
         return $result;
     }
     // DELETE
-    // Supprimer une entrée dans une table
     public static function delete(int $id): bool
     {
+        // Supprimer une entrée dans une table
         $pdo = Database::connect();
         // Requête SQL
         $sql = "DELETE FROM `vehicles`
