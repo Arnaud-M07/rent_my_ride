@@ -19,7 +19,8 @@ class Vehicle
 
 
     // METHODE CONSTRUCT
-    public function __construct(string $brand = '',
+    public function __construct(int $id_vehicle = null,
+                                string $brand = '',
                                 string $model = '',
                                 string $registration = '',
                                 int $mileage = 0,
@@ -27,10 +28,8 @@ class Vehicle
                                 string $created_at = null,
                                 string $updated_at = null,
                                 string $deleted_at = null,
-                                int $id_vehicle = null,
                                 int $id_category = null){
 
-        $this->id_category = $id_category;
         $this->id_vehicle = $id_vehicle;
         $this->brand = $brand;
         $this->model = $model;
@@ -40,6 +39,7 @@ class Vehicle
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
         $this->deleted_at = $deleted_at;
+        $this->id_category = $id_category;
     }
 
 
@@ -212,14 +212,16 @@ class Vehicle
     public static function countVehicles(int $id_category = 0, ?bool $isArchived = false, string $search = NULL): int
     {
         $pdo = Database::connect();
-        $sql = 'SELECT COUNT(`id_vehicle`)
+        $sql ='SELECT COUNT(`id_vehicle`)
                 FROM `vehicles`
                 INNER JOIN `categories` ON `categories`.`id_category` = `vehicles`.`id_category`';
+
         $sql .= ' WHERE 1 = 1';
+        // var_dump($sql);
 
         // Ajouter la condition pour la catégorie si elle est spécifiée
         if ($id_category !== 0) {
-            $sql .= ' AND `id_category` = :id_category';
+            $sql .= ' AND `categories`.`id_category` = :id_category';
         }
         if($isArchived){
             $sql .= ' AND `vehicles`.`deleted_at` IS NOT NULL' ;

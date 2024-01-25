@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../helpers/Database.php';
 
-class clients {
+class Client {
 
     private ?int $id_client;
     private string $lastname;
@@ -15,7 +15,8 @@ class clients {
     private ?string $updated_at;
 
 
-    public function __construct(string $lastname = '',
+    public function __construct(string $id_client = null,
+                                string $lastname = '',
                                 string $firstname = '',
                                 string $email = '',
                                 string $birthday = '',
@@ -23,8 +24,7 @@ class clients {
                                 string $city = '',
                                 string $zipcode = '',
                                 string $created_at = null,
-                                string $updated_at = null,
-                                string $id_client = null){
+                                string $updated_at = null){
 
         $this->id_client = $id_client;
         $this->lastname = $lastname;
@@ -122,7 +122,7 @@ class clients {
                         :clientBirthday,
                         :clientPhone,
                         :clientCity,
-                        :clientZipcode)";
+                        :clientZipcode);";
 
         $sth = $pdo->prepare($sql);
 

@@ -27,14 +27,25 @@
                 </div>
                 <div class="col col-md-6">
                     <div class="col form form-search d-flex">
-                        <input name="search" id="search" type="search" class="form-control form-input me-2" placeholder="Rechercher...">
+                        <input value="<?= $search ? $search : '' ?>" name="search" id="search" type="search" class="form-control form-input me-2" placeholder="Rechercher...">
                         <button type="submit" class="btn btn-search"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
             </div>
         </form>
 
-
+    <div class="row">
+        <div class="col px-4 pb-4">
+        <h4><?php if($nbVehicles === 0){
+                        echo 'Pas de véhicule trouvé...';
+                    } elseif ($nbVehicles === 1){
+                        echo $nbVehicles . ' véhicule trouvé';
+                    } else {
+                        echo $nbVehicles . ' véhicules trouvés';
+                    }?>
+        </h4>
+        </div>
+    </div>
     <div class="row g-4 mb-5">
         <!-- CARDS -->
         <?php foreach ($vehicles as $vehicle) { ?>

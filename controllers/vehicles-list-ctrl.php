@@ -17,6 +17,7 @@ try {
 
     // Compter le nombre de véhicules en fonction de la catégorie sélectionnée et/ou si une recherche est effectuée
     $nbVehicles = Vehicle::countVehicles($id_category, $isArchived, $search);
+
     // Pagination
     $nbPages = ceil($nbVehicles / NB_ELEMENT_PER_PAGE);
     if (($currentPage <= 0) || ($currentPage > $nbPages)) {
