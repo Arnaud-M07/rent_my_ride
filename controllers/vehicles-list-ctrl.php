@@ -4,7 +4,7 @@ require_once __DIR__ . '/../models/Category.php';
 
 
 try {
-    $title = 'Accueil';
+    $title = 'Liste de véhicules';
     $categories = Category::getAll();
     $isArchived=false;
 
@@ -17,26 +17,16 @@ try {
 
     // Compter le nombre de véhicules en fonction de la catégorie sélectionnée et/ou si une recherche est effectuée
     $nbVehicles = Vehicle::countVehicles($id_category, $isArchived, $search);
-    // if ($id_category !== 0) {
-    // } else {
-    //     $nbVehicles = Vehicle::countVehicles(null, false, $search);
-    // }
-
-
-    // Calculer le nombre de pages nécessaires pour la pagination
+    // Pagination
     $nbPages = ceil($nbVehicles / NB_ELEMENT_PER_PAGE);
-
-
-    // Définir la page actuelle à 1 si elle n'existe pas
     if (($currentPage <= 0) || ($currentPage > $nbPages)) {
         $currentPage = 1;
     }
-
     // Calculer l'offset pour la pagination
     $offset = NB_ELEMENT_PER_PAGE * ($currentPage - 1);
 
     // Obtenir les véhicules en fonction de la pagination et des filtres de catégorie
-    $vehicles = Vehicle::getAll($offset, true, false, $id_category, $search);
+    $vehicles = Vehicle::getAll($offset, true, false, $id_category, search: $search);
 
 
 } catch(PDOException $e) {

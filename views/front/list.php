@@ -10,8 +10,8 @@
                 </div>
             </div>
         </div>
-        <form id="categoryForm" action="" method="GET" class="form" enctype="multipart/form-data" novalidate>
-            <div class="row mb-5 gx-5 row-search">
+        <form action="" method="GET" enctype="multipart/form-data" novalidate>
+            <div class="row mb-5 gx-5 form row-search">
                 <!-- vehicleCategory -->
                 <div class="col col-md-6 ">
                     <select class="form-select listNames" name="id_category" id="id_category" aria-label="Floating label">
@@ -31,21 +31,19 @@
                         <button type="submit" class="btn btn-search"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
-
-
+            </div>
         </form>
 
-    </div>
-    <!-- 1st Row -->
+
     <div class="row g-4 mb-5">
-        <!-- Card 1-->
+        <!-- CARDS -->
         <?php foreach ($vehicles as $vehicle) { ?>
             <div class="col col-12 col-md-6 col-lg-4 row-cards">
                 <div class="card">
                     <img src="/public/uploads/vehicles/<?= $vehicle->picture ?>" class="card-img-top" alt="Photo de véhicule : <?= $vehicle->brand . ' ' . $vehicle->model ?>">
-                    <span class="badge badge-card"><?= $vehicle->categoryName ?></span>
+                    <span class="badge badge-card"><?= $vehicle->name ?></span>
                     <div class="card-body">
-                        <a href="/controllers/vehicles-detail-ctrl.php?id_vehicle=<?= $vehicle->id_vehicle?>" class="stretched-link">
+                        <a href="/controllers/vehicles-detail-ctrl.php?id_vehicle=<?= $vehicle->id_vehicle?>&id_category=<?= $id_category ?>" class="stretched-link">
                             <h5 class="card-title fw-bold text-black"><?= $vehicle->brand . ' ' . $vehicle->model ?></h5>
                         </a>
 

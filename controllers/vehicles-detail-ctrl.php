@@ -5,9 +5,13 @@ require_once __DIR__ . '/../models/Category.php';
 try {
     $title = 'Modifier un véhicule';
 
-    $categories = Category::getAll(); // Appel de la méthode statique getAll du modèle
     $id_vehicle = intval(filter_input(INPUT_GET, 'id_vehicle', FILTER_SANITIZE_NUMBER_INT));
+    // $id_category = intval(filter_input(INPUT_GET, 'id_category', FILTER_SANITIZE_NUMBER_INT));
     $vehicle = Vehicle::get($id_vehicle);
+    // $category = Category::get($vehicle->id_category);
+
+    // var_dump($category);
+
 
 
 
