@@ -87,10 +87,8 @@ class Category
         // Exécution de la requête
         $sth->execute();
         $result = $sth->fetch(PDO::FETCH_OBJ); // Va chercher la table et la retourne sous forme d'objet
-
         return $result;
     }
-
 
 
     // UPDATE
@@ -108,9 +106,7 @@ class Category
         // Affectation de la valeur correspondant au marqueur nominatif concerné
         $sth->bindValue(':categoryName', $this->getName());
         $sth->bindValue(':id_category', $this->getIdCategory(), PDO::PARAM_INT); // Récupération de l'id passé en URL
-
         $result = $sth->execute();
-
         return $result;
     }
 
@@ -143,7 +139,6 @@ class Category
         $sth->bindValue(':categoryName', $categoryName, PDO::PARAM_STR);
         $sth->execute();
         $result = $sth->fetchColumn();
-
         return ($result > 0);
     }
 }

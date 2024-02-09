@@ -6,10 +6,8 @@ try {
     $page = 'categories';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
         $error = [];
         $addedToDb = [];
-
 
         // Récupération, nettoyage et validation des données
         $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -22,13 +20,11 @@ try {
             }
         }
 
-
         // Vérifie si la donnée existe déjà en BDD
         $isExist = Category::isExist($categoryName);
         if($isExist){
             $error['name'] = 'Cette catégorie existe déjà!';
         }
-
 
         // Enregistrement en BDD
         if (empty($error)) {
@@ -38,7 +34,6 @@ try {
             $category->setName($categoryName);
             // Appel de la méthode insert
             $result = $category->insert();
-
             // Messages
             if ($result) {
                 $addedToDb['categoryName'] = "Catégorie ajoutée avec succès";

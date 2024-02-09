@@ -65,7 +65,6 @@ try {
             $error['id_category'] = 'Veuillez renseigner une catégorie';
         } else {
             $arrayCategoryIds = array_column($categories, 'id_category'); // Comparer l'id entré avec un tableau contenant tous les Id (tableu d'objet -> tableau de valeurs)
-
             $isOk = filter_var($id_category, FILTER_VALIDATE_INT);
             if (!$isOk || !in_array($id_category, $arrayCategoryIds)) {
                 $error['id_category'] = 'La catégorie renseignée n\'est pas valide.';
